@@ -1,0 +1,70 @@
+{
+    "logo":{
+        "connect": "Connect",
+        "roomies": "Roomies"
+    },
+    "login": {
+        "titulo": "Iniciar sesión",
+        "email":"Correo electrónico",
+        "emailPlaceholder":"tu@email.com",
+        "emailRequired":"El email es obligatorio",
+        "emailInvalid":"El email no es válido",
+        "password":"Contraseña",
+        "passwordPlaceholder":"••••••••",
+        "passwordError":"La contraseña es obligatoria",
+        "olvidaste":"¿Olvidaste tu contraseña?",
+        "boton":"Iniciar sesión",
+        "noCuenta":"¿No tienes una cuenta?",
+        "registrate":"Regístrate aquí"
+    },
+    "register": {
+        "titulo": "Registro",
+        "nombre": "Nombre",
+        "nombrePlaceholder": "Ingresa tu nombre",
+        "nombreError": "El nombre es obligatorio",
+        "email": "Correo electrónico",
+        "emailPlaceholder": "Ingresa tu correo",
+        "emailRequired": "El correo es obligatorio",
+        "emailInvalid": "El correo no es válido",
+        "password": "Contraseña",
+        "passwordPlaceholder": "Ingresa tu contraseña",
+        "confirmPassword": "Confirmar contraseña",
+        "confirmPasswordPlaceholder": "Confirma tu contraseña",
+        "passwordsNoMatch": "Las contraseñas no coinciden",
+        "terms": "Acepto los términos y condiciones",
+        "termsError": "Debes aceptar los términos",
+        "boton": "Registrarse",
+        "tienesCuenta": "¿Ya tienes una cuenta?",
+        "login": "Iniciar sesión"
+    },
+    "navbar": {
+        "links": {
+            "inicio": "Inicio",
+            "buscar": "Buscar",
+            "publicar": "Publicar",
+            "sobre_nosotros": "Sobre nosotros"
+        },
+        "buttons": {
+            "login": "Iniciar sesión",
+            "register": "Registrarse"
+        }
+    },
+    "footer": {
+        "brandName": "ConnectRoomies",
+        "description": "Facilitamos la búsqueda de viviendas para estudiantes. Tu hogar ideal te está esperando.",
+        "quickLinks": "Enlaces rápidos",
+        "home": "Inicio",
+        "findHousing": "Buscar viviendas",
+        "postAd": "Publicar anuncio",
+        "aboutUs": "Sobre nosotros",
+        "support": "Soporte",
+        "helpCenter": "Centro de ayuda",
+        "termsConditions": "Términos y condiciones",
+        "privacyPolicy": "Política de privacidad",
+        "faq": "FAQ",
+        "contact": "Contacto",
+        "email": "info@connectroomies.com",
+        "phone": "+34 900 000 000",
+        "allRightsReserved": "Todos los derechos reservados"
+    }
+}

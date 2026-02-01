@@ -1,1 +1,47 @@
-<p>footer works!</p>
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-left">
+        <div class="logo">
+            <img src="assets/images/logo.png" alt="Logo" class="logo-img">
+            <span class="logo-text">
+                <strong>{{'logo.connect' | translate}}</strong><span>{{'logo.roomies' | translate}}</span>
+            </span>
+        </div>
+    </div>
+
+    <div class="footer-links">
+      <h3>{{ 'footer.quickLinks' | translate }}</h3>
+      <ul>
+        <li><a href="#">{{ 'footer.home' | translate }}</a></li>
+        <li><a href="#">{{ 'footer.findHousing' | translate }}</a></li>
+        <li><a href="#">{{ 'footer.postAd' | translate }}</a></li>
+        <li><a href="#">{{ 'footer.aboutUs' | translate }}</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-support">
+      <h3>{{ 'footer.support' | translate }}</h3>
+      <ul>
+        <li><a href="#">{{ 'footer.helpCenter' | translate }}</a></li>
+        <li><a href="#">{{ 'footer.termsConditions' | translate }}</a></li>
+        <li><a href="#">{{ 'footer.privacyPolicy' | translate }}</a></li>
+        <li><a href="#">{{ 'footer.faq' | translate }}</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-contact">
+      <h3>{{ 'footer.contact' | translate }}</h3>
+      <ul>
+        <li><a href="mailto:info@connectroomies.com">{{ 'footer.email' | translate }}</a></li>
+        <li><a href="tel:+34900000000">{{ 'footer.phone' | translate }}</a></li>
+        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&#169; 2025 ConnectRoomies. {{ 'footer.allRightsReserved' | translate }}</p>
+  </div>
+</footer>

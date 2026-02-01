@@ -1,1 +1,22 @@
-<p>navbar works!</p>
+<nav class="navbar">
+    <div class="navbar-left">
+        <div class="logo">
+            <img src="assets/images/logo.png" alt="Logo" class="logo-img">
+            <span class="logo-text">
+                <strong>{{'logo.connect' | translate}}</strong><span>{{'logo.roomies' | translate}}</span>
+            </span>
+        </div>
+    </div>
+    <div class="navbar-center">
+        <ul class="nav-links">
+            <li><a routerLink="/">{{ 'navbar.links.inicio' | translate }}</a></li>
+            <li><a routerLink="/buscar">{{ 'navbar.links.buscar' | translate }}</a></li>
+            <li><a routerLink="/publicar">{{ 'navbar.links.publicar' | translate }}</a></li>
+            <li><a routerLink="/sobre-nosotros">{{ 'navbar.links.sobre_nosotros' | translate }}</a></li>
+        </ul>
+    </div>
+    <div class="navbar-right">
+        <a routerLink="/login" class="login">{{ 'navbar.buttons.login' | translate }}</a>
+        <a routerLink="/registro" class="btn-register">{{ 'navbar.buttons.register' | translate }}</a>
+    </div>
+</nav>

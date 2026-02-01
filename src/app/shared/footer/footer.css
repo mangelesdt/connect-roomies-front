@@ -1,0 +1,94 @@
+.footer {
+  background-color: #1a1a1a;
+  color: white;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-left, .footer-links, .footer-support, .footer-contact {
+  flex: 1;
+  min-width: 200px;
+}
+
+.brand {
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.brand-icon {
+  font-size: 24px;
+  margin-right: 8px;
+}
+
+.description {
+  margin-top: 10px;
+}
+
+.footer-links ul, .footer-support ul, .footer-contact ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li, .footer-support li, .footer-contact li {
+  margin: 8px 0;
+}
+
+.footer-links a, .footer-support a, .footer-contact a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.footer-bottom p {
+  font-size: 14px;
+}
+
+.footer-contact a i {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.footer-contact a:hover, .footer-links a:hover, .footer-support a:hover {
+  text-decoration: underline;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.logo-img {
+  background: #2563eb;
+  color: white;
+  border-radius: 50%;
+  padding: 0.2rem;
+  width: 40px;
+  height: auto;
+}
+
+.logo-text {
+  font-size: 1.2rem;
+}
+
+.logo-text strong {
+  color: #2563eb;
+}
+
+.logo-text span {
+  color: #f97316;
+  margin-left: 2px;
+}

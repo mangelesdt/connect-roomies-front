@@ -1,1 +1,92 @@
-<p>register works!</p>
+<div class="login-container">
+  <div class="login-header">
+    <div class="logo">
+      <img src="assets/images/logo.png" alt="Logo" class="logo-img">
+      <span class="logo-text">
+        <strong>{{'logo.connect' | translate}}</strong><span>{{'logo.roomies' | translate}}</span>
+      </span>
+    </div>
+    <h2>{{ 'register.titulo' | translate }}</h2>
+  </div>
+
+  <form [formGroup]="registerForm" (ngSubmit)="submit()" class="login-card">
+
+    <!-- NOMBRE -->
+    <div class="form-group">
+      <label>{{ 'register.nombre' | translate }}</label>
+      <input
+        type="text"
+        placeholder="{{ 'register.nombrePlaceholder' | translate }}"
+        formControlName="name"
+      >
+      <ng-container *ngIf="f['name'].touched && f['name'].invalid">
+        <small class="error">{{ 'register.nombreError' | translate }}</small>
+      </ng-container>
+    </div>
+
+    <!-- EMAIL -->
+    <div class="form-group">
+      <label>{{ 'register.email' | translate }}</label>
+      <input
+        type="email"
+        placeholder="{{ 'register.emailPlaceholder' | translate }}"
+        formControlName="email"
+      >
+      <ng-container *ngIf="f['email'].touched && f['email'].invalid">
+        <small class="error">
+          <ng-container *ngIf="f['email'].errors?.['required']">
+            {{ 'register.emailRequired' | translate }}
+          </ng-container>
+          <ng-container *ngIf="f['email'].errors?.['email']">
+            {{ 'register.emailInvalid' | translate }}
+          </ng-container>
+        </small>
+      </ng-container>
+    </div>
+
+    <!-- PASSWORD -->
+    <div class="form-group">
+      <label>{{ 'register.password' | translate }}</label>
+      <input
+        type="password"
+        placeholder="{{ 'register.passwordPlaceholder' | translate }}"
+        formControlName="password"
+      >
+    </div>
+
+    <!-- CONFIRM PASSWORD -->
+    <div class="form-group">
+      <label>{{ 'register.confirmPassword' | translate }}</label>
+      <input
+        type="password"
+        placeholder="{{ 'register.confirmPasswordPlaceholder' | translate }}"
+        formControlName="confirmPassword"
+      >
+      <ng-container *ngIf="registerForm.touched && registerForm.errors?.['notMatching']">
+        <small class="error">{{ 'register.passwordsNoMatch' | translate }}</small>
+      </ng-container>
+    </div>
+
+    <!-- TERMS -->
+    <div class="form-options">
+      <label class="checkbox">
+        <input type="checkbox" formControlName="terms">
+        {{ 'register.terms' | translate }}
+      </label>
+      <ng-container *ngIf="f['terms'].touched && f['terms'].invalid">
+        <small class="error">{{ 'register.termsError' | translate }}</small>
+      </ng-container>
+    </div>
+
+    <!-- BUTTON -->
+    <button type="submit" class="btn-primary" [disabled]="registerForm.invalid">
+      {{ 'register.boton' | translate }}
+    </button>
+
+    <p class="register">
+      {{ 'register.tienesCuenta' | translate }}
+      <a routerLink="/login">{{ 'register.login' | translate }}</a>
+    </p>
+
+  </form>
+</div>

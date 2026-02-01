@@ -1,0 +1,159 @@
+.login-container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #eef5ff 0%, #f6faff 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.logo-img {
+  background: #2563eb;
+  color: white;
+  border-radius: 50%;
+  padding: 0.2rem;
+  width: 40px;
+  height: auto;
+}
+
+.logo-text {
+  font-size: 1.2rem;
+}
+
+.logo-text strong {
+  color: #2563eb;
+}
+
+.logo-text span {
+  color: #f97316;
+  margin-left: 2px;
+}
+
+.subtitle {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.login-card {
+  background: white;
+  width: 100%;
+  max-width: 380px;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+  color: #374151;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper input {
+  width: 90%;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem; /* ↓ menos alto */
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 0.8rem; /* ↓ texto más pequeño */
+  outline: none;
+}
+
+.input-wrapper input:focus {
+  border-color: #2563eb;
+}
+
+.icon {
+  position: absolute;
+  left: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
+
+.icon.right {
+  left: auto;
+  right: 0.7rem;
+  cursor: pointer;
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  margin-bottom: 1.4rem;
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.forgot {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 0.75rem;
+  background: #2563eb;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.btn-primary:disabled {
+  background: #93c5fd;
+  cursor: not-allowed;
+}
+
+.register {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.register a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.error {
+  color: #d32f2f;
+  font-size: 0.7rem;
+  margin-top: 4px;
+}
