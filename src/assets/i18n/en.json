@@ -40,7 +40,6 @@
     "navbar": {
         "links": {
             "inicio": "Inicio",
-            "buscar": "Buscar",
             "publicar": "Publicar",
             "sobre_nosotros": "Sobre nosotros"
         },
@@ -66,5 +65,20 @@
         "email": "info@connectroomies.com",
         "phone": "+34 900 000 000",
         "allRightsReserved": "Todos los derechos reservados"
+    },
+    "home": {
+        "hero": {
+            "titulo": "Encuentra tu vivienda ideal",
+            "subtitulo": "Busca pisos y habitaciones en tu ciudad"
+        },
+        "filtros": {
+            "ciudad": "Ciudad",
+            "precioMax": "Precio máximo",
+            "tipo": "Tipo de vivienda"
+        },
+        "resultados": {
+            "encontradas": "viviendas encontradas"
+        },
+        "verDetalle": "Ver detalles"
     }
 }

@@ -1,2 +1,103 @@
-<h1>Home</h1>
-  
+<div class="home-container">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>{{ 'home.hero.titulo' | translate }}</h1>
+      <p>{{ 'home.hero.subtitulo' | translate }}</p>
+    </div>
+  </section>
+
+
+  <!-- FILTRO CARD -->
+  <section class="filtro-card">
+    <form [formGroup]="filtroForm" class="filtro-form">
+
+      <div class="form-group">
+        <label>{{ 'home.filtros.ciudad' | translate }}</label>
+        <input type="text" formControlName="ciudad">
+      </div>
+
+      <div class="form-group">
+        <label>{{ 'home.filtros.tipo' | translate }}</label>
+        <select formControlName="tipo">
+          <option value="Apartamento">Apartamento</option>
+          <option value="Piso">Piso</option>
+          <option value="Habitación">Habitación</option>
+          <option value="Loft">Loft</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>{{ 'home.filtros.precioMax' | translate }}</label>
+        <input type="number" formControlName="precioMax">
+      </div>
+
+      <div class="form-group mt-4">
+        <button type="button" class="btn-clear" (click)="filtroForm.reset()">
+          Limpiar
+        </button>
+      </div>
+
+    </form>
+  </section>
+
+
+  <!-- RESULTADOS -->
+  <section class="resultados">
+
+    <div class="resultados-header">
+      <p>
+        {{ viviendasFiltradas.length }}
+        {{ 'home.resultados.encontradas' | translate }}
+      </p>
+
+      <select class="ordenar">
+        <option>Más recientes</option>
+        <option>Precio ascendente</option>
+        <option>Precio descendente</option>
+      </select>
+    </div>
+
+
+    <!-- CARDS -->
+    <div class="cards">
+
+      @for (vivienda of viviendasFiltradas; track vivienda) {
+
+        <div class="card">
+
+          <div class="img-container">
+            <img [src]="vivienda.imagen" alt="Vivienda">
+            <span class="badge">{{ vivienda.tipo }}</span>
+          </div>
+
+          <div class="card-content">
+            <h3>{{ vivienda.titulo }}</h3>
+            <p class="ciudad">{{ vivienda.ciudad }}</p>
+
+            <div class="meta">
+              <span>🛏 1</span>
+              <span>🛁 1</span>
+              <span>📐 30m²</span>
+            </div>
+
+            <div class="precio-row">
+              <p class="precio">{{ vivienda.precio }} € / mes</p>
+
+              <button
+                class="btn-detalle"
+                [routerLink]="['/property', vivienda.id]">
+                {{ 'home.verDetalle' | translate }}
+              </button>
+            </div>
+          </div>
+
+        </div>
+      }
+
+    </div>
+
+  </section>
+
+</div>
