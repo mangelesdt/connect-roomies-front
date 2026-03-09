@@ -14,6 +14,9 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 export class RegisterComponent {
 
   registerForm: FormGroup;
+  showPassword = false;
+  showConfirmPassword = false;
+  selectedUserType: 'student' | 'landlord' = 'student';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,7 +41,11 @@ export class RegisterComponent {
     return pass === confirm ? null : { notMatching: true };
   }
 
-  submit() {
+  selectUserType(type: 'student' | 'landlord') {
+    this.selectedUserType = type;
+  }
+
+  onSubmit() {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
       return;

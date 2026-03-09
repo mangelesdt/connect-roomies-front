@@ -18,24 +18,47 @@
         "registrate":"Regístrate aquí"
     },
     "register": {
-        "titulo": "Registro",
-        "nombre": "Nombre",
-        "nombrePlaceholder": "Ingresa tu nombre",
-        "nombreError": "El nombre es obligatorio",
-        "email": "Correo electrónico",
-        "emailPlaceholder": "Ingresa tu correo",
-        "emailRequired": "El correo es obligatorio",
-        "emailInvalid": "El correo no es válido",
-        "password": "Contraseña",
-        "passwordPlaceholder": "Ingresa tu contraseña",
-        "confirmPassword": "Confirmar contraseña",
-        "confirmPasswordPlaceholder": "Confirma tu contraseña",
-        "passwordsNoMatch": "Las contraseñas no coinciden",
-        "terms": "Acepto los términos y condiciones",
-        "termsError": "Debes aceptar los términos",
-        "boton": "Registrarse",
-        "tienesCuenta": "¿Ya tienes una cuenta?",
-        "login": "Iniciar sesión"
+        "title": "Crear cuenta",
+        "subtitle": "Únete a ConnectRoomies y encuentra tu hogar ideal",
+        "userType": {
+            "title": "Tipo de usuario",
+            "student": {
+            "title": "Estudiante",
+            "subtitle": "Busco vivienda"
+            },
+            "landlord": {
+            "title": "Arrendador",
+            "subtitle": "Ofrezco vivienda"
+            }
+        },
+        "fields": {
+            "fullName": "Nombre completo",
+            "phone": "Teléfono",
+            "email": "Email",
+            "password": "Contraseña",
+            "confirmPassword": "Confirmar contraseña"
+        },
+        "placeholders": {
+            "fullName": "Juan Pérez",
+            "phone": "600 000 000",
+            "email": "tu@email.com",
+            "password": "••••••••"
+        },
+        "terms": {
+            "prefix": "Acepto los",
+            "termsLink": "términos y condiciones",
+            "middle": "y la",
+            "privacyLink": "política de privacidad"
+        },
+        "actions": {
+            "createAccount": "Crear cuenta",
+            "show": "Mostrar",
+            "hide": "Ocultar"
+        },
+        "login": {
+            "text": "¿Ya tienes cuenta?",
+            "link": "Inicia sesión"
+        }
     },
     "navbar": {
         "links": {
@@ -80,5 +103,159 @@
             "encontradas": "viviendas encontradas"
         },
         "verDetalle": "Ver detalles"
+    },
+    "publish": {
+        "title": "Publicar propiedad",
+        "subtitle": "Completa la información de tu propiedad para comenzar a recibir solicitudes",
+        "back": "Volver",
+        "cancel": "Cancelar",
+        "submit": "Publicar propiedad",
+        "basicInfo": {
+            "title": "Información básica",
+            "adTitle": "Título del anuncio",
+            "adTitlePlaceholder": "Ej: Habitación luminosa cerca de la universidad",
+            "housingType": "Tipo de vivienda",
+            "selectType": "Selecciona un tipo",
+            "zone": "Zona",
+            "selectZone": "Selecciona una zona",
+            "fullAddress": "Dirección completa",
+            "fullAddressPlaceholder": "Calle, número, piso"
+        },
+        "features": {
+            "title": "Características",
+            "rooms": "Habitaciones",
+            "bathrooms": "Baños",
+            "size": "Tamaño (m²)",
+            "price": "Precio/mes (€)",
+            "availableFrom": "Disponible desde"
+        },
+        "amenities": {
+            "title": "Comodidades",
+            "subtitle": "Selecciona las comodidades disponibles"
+        },
+        "images": {
+            "title": "Imágenes",
+            "subtitle": "Añade fotos de calidad para atraer más interesados (mínimo 3 imágenes)",
+            "clickUpload": "Haz clic para subir imágenes",
+            "dragDrop": "o arrastra y suelta aquí",
+            "formats": "JPG, PNG o WEBP (máx. 5MB)",
+            "selectedFiles": "Archivos seleccionados:"
+        },
+        "description": {
+            "title": "Descripción",
+            "placeholder": "Describe tu propiedad: ubicación, ambiente, proximidad a servicios, transporte, etc."
+        },
+        "rules": {
+            "title": "Normas de la vivienda",
+            "placeholder": "Ejemplo: No se permite fumar, no mascotas, horarios de visita, etc. (una norma por línea)"
+        },
+        "contact": {
+            "title": "Información de contacto",
+            "fullName": "Nombre completo",
+            "fullNamePlaceholder": "Tu nombre",
+            "phone": "Teléfono",
+            "phonePlaceholder": "+34 600 000 000",
+            "email": "Email",
+            "emailPlaceholder": "tu@email.com"
+        },
+        "beforePublishing": {
+            "title": "Antes de publicar",
+            "tip1": "Asegúrate de que toda la información es correcta y actualizada",
+            "tip2": "Las imágenes deben ser reales y representativas de la propiedad",
+            "tip3": "Responde rápidamente a las consultas para aumentar tus posibilidades"
+        },
+        "options": {
+            "housingType": {
+                "room": "Habitación",
+                "flat": "Piso",
+                "apartment": "Apartamento",
+                "house": "Casa"
+            },
+            "zone": {
+                "center": "Centro",
+                "north": "Norte",
+                "south": "Sur",
+                "east": "Este",
+                "west": "Oeste"
+            },
+            "amenities": {
+                "wifi": "WiFi",
+                "airConditioning": "Aire acondicionado",
+                "heating": "Calefacción",
+                "parking": "Parking",
+                "tv": "TV",
+                "furnished": "Amueblado"
+            }
+        }
+    },
+    "aboutUs": {
+        "hero": {
+            "kicker": "Sobre ConnectRoomies",
+            "title": "Conectamos estudiantes con su hogar ideal",
+            "subtitle": "Somos la plataforma que conecta estudiantes con su hogar ideal. Nuestra misión es hacer que encontrar vivienda sea tan simple como debería ser."
+        },
+        "story": {
+            "title": "Nuestra historia",
+            "imageAlt": "Estudiantes buscando vivienda",
+            "paragraph1": "ConnectRoomies nació de una necesidad real. Como estudiantes, vivimos en primera persona lo complicado y estresante que puede ser buscar vivienda al inicio del curso académico. Anuncios desactualizados, intermediarios, falta de transparencia... sabíamos que tenía que haber una mejor manera.",
+            "paragraph2": "Así creamos esta plataforma: un espacio donde estudiantes y arrendadores pueden conectar directamente, con información clara, actualizada y verificada. Queremos que tu única preocupación sea encontrar el lugar perfecto para ti, no perder tiempo en búsquedas frustrantes.",
+            "paragraph3": "Hoy, miles de estudiantes confían en ConnectRoomies para encontrar su hogar, y seguimos trabajando cada día para mejorar la experiencia de todos nuestros usuarios."
+        },
+        "numbers": {
+            "title": "ConnectRoomies en números",
+            "subtitle": "Nuestra comunidad crece cada día"
+        },
+        "stats": {
+            "publishedProperties": "Propiedades publicadas",
+            "registeredStudents": "Estudiantes registrados",
+            "satisfaction": "Satisfacción",
+            "support": "Soporte disponible"
+        },
+        "whyChoose": {
+            "title": "¿Por qué elegir ConnectRoomies?",
+            "subtitle": "Ofrecemos una experiencia completa diseñada para hacer tu búsqueda lo más fácil posible"
+        },
+        "features": {
+            "search": {
+                "title": "Búsqueda sencilla",
+                "description": "Encuentra tu vivienda ideal con nuestro sistema de filtros intuitivo y resultados precisos."
+            },
+            "security": {
+                "title": "Seguridad garantizada",
+                "description": "Verificamos propiedades y perfiles para ofrecerte una experiencia segura y confiable."
+            },
+            "communication": {
+                "title": "Comunicación directa",
+                "description": "Contacta directamente con arrendadores y estudiantes sin intermediarios complicados."
+            },
+            "community": {
+                "title": "Comunidad estudiantil",
+                "description": "Una plataforma diseñada por y para estudiantes que entiende tus necesidades."
+            }
+        },
+        "valuesSection": {
+            "title": "Nuestros valores",
+            "subtitle": "Los principios que guían todo lo que hacemos"
+        },
+        "values": {
+            "mission": {
+                "title": "Misión",
+                "description": "Simplificar la búsqueda de vivienda para estudiantes, haciendo que el proceso sea transparente, rápido y accesible para todos."
+            },
+            "community": {
+                "title": "Comunidad",
+                "description": "Crear un espacio donde estudiantes y arrendadores se conecten de forma genuina y construyan relaciones de confianza."
+            },
+            "innovation": {
+                "title": "Innovación",
+                "description": "Desarrollar constantemente nuevas funcionalidades que mejoren la experiencia de buscar y ofrecer alojamiento estudiantil."
+            }
+        },
+        "cta": {
+            "title": "¿Listo para encontrar tu hogar ideal?",
+            "subtitle": "Únete a miles de estudiantes que ya han encontrado su vivienda perfecta a través de ConnectRoomies",
+            "createAccount": "Crear cuenta gratis",
+            "exploreProperties": "Explorar propiedades"
+        }
     }
 }

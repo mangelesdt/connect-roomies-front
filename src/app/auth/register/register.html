@@ -1,92 +1,150 @@
-<div class="login-container">
-  <div class="login-header">
-    <div class="logo">
-      <img src="assets/images/logo.png" alt="Logo" class="logo-img">
-      <span class="logo-text">
-        <strong>{{'logo.connect' | translate}}</strong><span>{{'logo.roomies' | translate}}</span>
-      </span>
+<div class="register-page">
+  <div class="register-container">
+    <div class="register-header">
+      <img src="assets/images/logo.png" alt="Logo ConnectRoomies" class="logo" />
+      <h1>{{ 'register.title' | translate }}</h1>
+      <p>{{ 'register.subtitle' | translate }}</p>
     </div>
-    <h2>{{ 'register.titulo' | translate }}</h2>
+
+    <div class="register-card">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="section-title">
+          {{ 'register.userType.title' | translate }}
+        </div>
+
+        <div class="user-type-grid">
+          <button
+            type="button"
+            class="user-type-card"
+            [class.active]="selectedUserType === 'student'"
+            (click)="selectUserType('student')"
+          >
+            <div class="user-type-icon">
+              <img
+                src="assets/images/iconoPersonaRegistro.jpg"
+                [alt]="'register.userType.student.title' | translate"
+              />
+            </div>
+            <h3>{{ 'register.userType.student.title' | translate }}</h3>
+            <p>{{ 'register.userType.student.subtitle' | translate }}</p>
+          </button>
+
+          <button
+            type="button"
+            class="user-type-card"
+            [class.active]="selectedUserType === 'landlord'"
+            (click)="selectUserType('landlord')"
+          >
+            <div class="user-type-icon">
+              <img
+                src="assets/images/iconoCasaRegistro.jpg"
+                [alt]="'register.userType.landlord.title' | translate"
+              />
+            </div>
+            <h3>{{ 'register.userType.landlord.title' | translate }}</h3>
+            <p>{{ 'register.userType.landlord.subtitle' | translate }}</p>
+          </button>
+        </div>
+
+        <div class="form-grid two-cols">
+          <div class="field">
+            <label for="fullName">{{ 'register.fields.fullName' | translate }}</label>
+            <input
+              id="fullName"
+              type="text"
+              formControlName="fullName"
+              [placeholder]="'register.placeholders.fullName' | translate"
+            />
+          </div>
+
+          <div class="field">
+            <label for="phone">{{ 'register.fields.phone' | translate }}</label>
+            <input
+              id="phone"
+              type="tel"
+              formControlName="phone"
+              [placeholder]="'register.placeholders.phone' | translate"
+            />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email">{{ 'register.fields.email' | translate }}</label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            [placeholder]="'register.placeholders.email' | translate"
+          />
+        </div>
+
+        <div class="form-grid two-cols">
+          <div class="field">
+            <label for="password">{{ 'register.fields.password' | translate }}</label>
+            <div class="input-with-action">
+              <input
+                id="password"
+                [type]="showPassword ? 'text' : 'password'"
+                formControlName="password"
+                [placeholder]="'register.placeholders.password' | translate"
+              />
+              <button
+                type="button"
+                class="toggle-btn"
+                (click)="showPassword = !showPassword"
+              >
+                {{
+                  showPassword
+                    ? ('register.actions.hide' | translate)
+                    : ('register.actions.show' | translate)
+                }}
+              </button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="confirmPassword">{{ 'register.fields.confirmPassword' | translate }}</label>
+            <div class="input-with-action">
+              <input
+                id="confirmPassword"
+                [type]="showConfirmPassword ? 'text' : 'password'"
+                formControlName="confirmPassword"
+                [placeholder]="'register.placeholders.password' | translate"
+              />
+              <button
+                type="button"
+                class="toggle-btn"
+                (click)="showConfirmPassword = !showConfirmPassword"
+              >
+                {{
+                  showConfirmPassword
+                    ? ('register.actions.hide' | translate)
+                    : ('register.actions.show' | translate)
+                }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <label class="checkbox-row">
+          <input type="checkbox" formControlName="acceptTerms" />
+          <span>
+            {{ 'register.terms.prefix' | translate }}
+            <a routerLink="/">{{ 'register.terms.termsLink' | translate }}</a>
+            {{ 'register.terms.middle' | translate }}
+            <a routerLink="/">{{ 'register.terms.privacyLink' | translate }}</a>
+          </span>
+        </label>
+
+        <button type="submit" class="submit-btn">
+          {{ 'register.actions.createAccount' | translate }}
+        </button>
+
+        <p class="login-link">
+          {{ 'register.login.text' | translate }}
+          <a routerLink="/login">{{ 'register.login.link' | translate }}</a>
+        </p>
+      </form>
+    </div>
   </div>
-
-  <form [formGroup]="registerForm" (ngSubmit)="submit()" class="login-card">
-
-    <!-- NOMBRE -->
-    <div class="form-group">
-      <label>{{ 'register.nombre' | translate }}</label>
-      <input
-        type="text"
-        placeholder="{{ 'register.nombrePlaceholder' | translate }}"
-        formControlName="name"
-      >
-      <ng-container *ngIf="f['name'].touched && f['name'].invalid">
-        <small class="error">{{ 'register.nombreError' | translate }}</small>
-      </ng-container>
-    </div>
-
-    <!-- EMAIL -->
-    <div class="form-group">
-      <label>{{ 'register.email' | translate }}</label>
-      <input
-        type="email"
-        placeholder="{{ 'register.emailPlaceholder' | translate }}"
-        formControlName="email"
-      >
-      <ng-container *ngIf="f['email'].touched && f['email'].invalid">
-        <small class="error">
-          <ng-container *ngIf="f['email'].errors?.['required']">
-            {{ 'register.emailRequired' | translate }}
-          </ng-container>
-          <ng-container *ngIf="f['email'].errors?.['email']">
-            {{ 'register.emailInvalid' | translate }}
-          </ng-container>
-        </small>
-      </ng-container>
-    </div>
-
-    <!-- PASSWORD -->
-    <div class="form-group">
-      <label>{{ 'register.password' | translate }}</label>
-      <input
-        type="password"
-        placeholder="{{ 'register.passwordPlaceholder' | translate }}"
-        formControlName="password"
-      >
-    </div>
-
-    <!-- CONFIRM PASSWORD -->
-    <div class="form-group">
-      <label>{{ 'register.confirmPassword' | translate }}</label>
-      <input
-        type="password"
-        placeholder="{{ 'register.confirmPasswordPlaceholder' | translate }}"
-        formControlName="confirmPassword"
-      >
-      <ng-container *ngIf="registerForm.touched && registerForm.errors?.['notMatching']">
-        <small class="error">{{ 'register.passwordsNoMatch' | translate }}</small>
-      </ng-container>
-    </div>
-
-    <!-- TERMS -->
-    <div class="form-options">
-      <label class="checkbox">
-        <input type="checkbox" formControlName="terms">
-        {{ 'register.terms' | translate }}
-      </label>
-      <ng-container *ngIf="f['terms'].touched && f['terms'].invalid">
-        <small class="error">{{ 'register.termsError' | translate }}</small>
-      </ng-container>
-    </div>
-
-    <!-- BUTTON -->
-    <button type="submit" class="btn-primary" [disabled]="registerForm.invalid">
-      {{ 'register.boton' | translate }}
-    </button>
-
-    <p class="register">
-      {{ 'register.tienesCuenta' | translate }}
-      <a routerLink="/login">{{ 'register.login' | translate }}</a>
-    </p>
-
-  </form>
 </div>

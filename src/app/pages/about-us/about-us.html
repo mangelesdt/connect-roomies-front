@@ -1,0 +1,95 @@
+<div class="about-page">
+  <section class="hero">
+    <div class="hero-content">
+      <h3>{{ 'aboutUs.hero.kicker' | translate }}</h3>
+      <h1>{{ 'aboutUs.hero.title' | translate }}</h1>
+      <p class="hero-subtitle">{{ 'aboutUs.hero.subtitle' | translate }}</p>
+    </div>
+  </section>
+
+  <section class="story container">
+    <div class="story-grid">
+      <div class="story-image-wrapper">
+        <img
+          src="assets/images/house1.jpg"
+          [alt]="'aboutUs.story.imageAlt' | translate"
+          class="story-image"
+        />
+      </div>
+
+      <div class="story-content">
+        <h2>{{ 'aboutUs.story.title' | translate }}</h2>
+        <p>{{ 'aboutUs.story.paragraph1' | translate }}</p>
+        <p>{{ 'aboutUs.story.paragraph2' | translate }}</p>
+        <p>{{ 'aboutUs.story.paragraph3' | translate }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-section container">
+    <div class="stats-card">
+      <h2>{{ 'aboutUs.numbers.title' | translate }}</h2>
+      <p class="section-subtitle">{{ 'aboutUs.numbers.subtitle' | translate }}</p>
+
+      <div class="stats-grid">
+        @for (stat of stats; track stat.label) {
+          <div class="stat-item">
+            <h3>{{ stat.value }}</h3>
+            <p>{{ stat.label | translate }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="features-section container">
+    <div class="section-heading">
+      <h2>{{ 'aboutUs.whyChoose.title' | translate }}</h2>
+      <p>{{ 'aboutUs.whyChoose.subtitle' | translate }}</p>
+    </div>
+
+    <div class="features-grid">
+      @for (feature of features; track feature.title) {
+        <article class="feature-card">
+          <div class="icon-circle">{{ feature.icon }}</div>
+          <h3>{{ feature.title | translate }}</h3>
+          <p>{{ feature.description | translate }}</p>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="values-section container">
+    <div class="section-heading">
+      <h2>{{ 'aboutUs.valuesSection.title' | translate }}</h2>
+      <p>{{ 'aboutUs.valuesSection.subtitle' | translate }}</p>
+    </div>
+
+    <div class="values-grid">
+      @for (value of values; track value.title) {
+        <article class="value-card">
+          <div class="icon-circle">{{ value.icon }}</div>
+          <h3>{{ value.title | translate }}</h3>
+          <p>{{ value.description | translate }}</p>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="cta-section container">
+    <div class="cta-card">
+      <img src="assets/images/iconoPublicar.png" alt="Logo" class="icon-circle large">
+      <h2>{{ 'aboutUs.cta.title' | translate }}</h2>
+      <p>{{ 'aboutUs.cta.subtitle' | translate }}</p>
+
+      <div class="cta-actions">
+        <a routerLink="/registro" class="btn btn-primary">
+          {{ 'aboutUs.cta.createAccount' | translate }}
+        </a>
+        <a routerLink="/" class="btn btn-secondary">
+          {{ 'aboutUs.cta.exploreProperties' | translate }}
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
