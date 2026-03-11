@@ -58,6 +58,20 @@
         "login": {
             "text": "¿Ya tienes cuenta?",
             "link": "Inicia sesión"
+        },
+        "errors": {
+            "fullNameRequired": "El nombre completo es obligatorio",
+            "fullNameMinLength": "El nombre debe tener al menos 3 caracteres",
+            "fullNameMaxLength": "El nombre no puede superar los 60 caracteres",
+            "phoneRequired": "El teléfono es obligatorio",
+            "phoneInvalid": "Introduce un teléfono válido",
+            "emailRequired": "El email es obligatorio",
+            "emailInvalid": "Introduce un email válido",
+            "passwordRequired": "La contraseña es obligatoria",
+            "passwordMinLength": "La contraseña debe tener al menos 8 caracteres",
+            "confirmPasswordRequired": "Debes confirmar la contraseña",
+            "passwordMismatch": "Las contraseñas no coinciden",
+            "acceptTermsRequired": "Debes aceptar los términos y la política de privacidad"
         }
     },
     "navbar": {
@@ -256,6 +270,56 @@
             "subtitle": "Únete a miles de estudiantes que ya han encontrado su vivienda perfecta a través de ConnectRoomies",
             "createAccount": "Crear cuenta gratis",
             "exploreProperties": "Explorar propiedades"
+        }
+    },
+    "propertyDetail": {
+        "back": "Volver a búsqueda",
+        "gallery": {
+            "imageAlt": "Imagen de la vivienda",
+            "thumbnailAlt": "Miniatura de la vivienda"
+        },
+        "labels": {
+            "room": "Habitación",
+            "available": "Disponible"
+        },
+        "mock": {
+            "title": "Habitación luminosa cerca de la Universidad",
+            "location": "Centro - Universidad",
+            "description": "Habitación amplia y luminosa en piso compartido, perfecta para estudiantes. La vivienda cuenta con todas las comodidades necesarias y está ubicada a solo 5 minutos caminando de la universidad. El ambiente es tranquilo y propicio para el estudio."
+        },
+        "features": {
+            "bedroom": "habitación",
+            "bathroom": "baño"
+        },
+        "descriptionTitle": "Descripción",
+        "featuresTitle": "Características",
+        "expensesTitle": "Desglose de gastos",
+        "rulesTitle": "Normas de la vivienda",
+        "expenses": {
+            "rent": "Alquiler",
+            "services": "Servicios (luz, agua, gas)",
+            "internet": "Internet",
+            "cleaning": "Limpieza común",
+            "total": "Total mensual"
+        },
+        "amenities": {
+            "wifi": "WiFi de alta velocidad",
+            "airConditioning": "Aire acondicionado",
+            "tv": "TV en habitación",
+            "furnished": "Completamente amueblada",
+            "parking": "Parking disponible",
+            "heating": "Calefacción"
+        },
+        "rules": {
+            "rule1": "No se permite fumar",
+            "rule2": "No se permiten mascotas",
+            "rule3": "Horarios de visita: 9:00 - 21:00",
+            "rule4": "Piso compartido con 3 estudiantes más"
+        },
+        "contactTitle": "Contactar con el arrendador",
+        "contact": {
+            "responseTime": "Tiempo de respuesta",
+            "tip": "Consejo: Siempre visita la propiedad antes de hacer cualquier pago."
         }
     }
 }

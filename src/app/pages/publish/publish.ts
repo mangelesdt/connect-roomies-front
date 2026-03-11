@@ -22,7 +22,7 @@ type AmenityKey =
 @Component({
   selector: 'app-publish',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslateModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule],
   templateUrl: './publish.html',
   styleUrls: ['./publish.css']
 })

@@ -85,9 +85,7 @@
             <div class="precio-row">
               <p class="precio">{{ vivienda.precio }} € / mes</p>
 
-              <button
-                class="btn-detalle"
-                [routerLink]="['/property', vivienda.id]">
+              <button type="button" class="btn-detalle" [routerLink]="['/vivienda', vivienda.id]">
                 {{ 'home.verDetalle' | translate }}
               </button>
             </div>

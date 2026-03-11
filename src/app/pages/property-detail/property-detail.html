@@ -1,0 +1,142 @@
+<div class="detail-page">
+  <div class="detail-topbar">
+    <button type="button" class="back-button" (click)="goBack()">
+      ← {{ 'propertyDetail.back' | translate }}
+    </button>
+  </div>
+
+  <div class="detail-container">
+    <div class="gallery-card">
+      <div class="main-image-wrapper">
+        <img
+          [src]="property.images[currentImageIndex]"
+          [alt]="'propertyDetail.gallery.imageAlt' | translate"
+          class="main-image"
+        />
+
+        <button type="button" class="gallery-arrow left" (click)="prevImage()">‹</button>
+        <button type="button" class="gallery-arrow right" (click)="nextImage()">›</button>
+
+        <div class="image-counter">
+          {{ currentImageIndex + 1 }}/{{ property.images.length }}
+        </div>
+      </div>
+
+      <div class="thumbnails">
+        @for (image of property.images; track image; let i = $index) {
+          <button
+            type="button"
+            class="thumb-btn"
+            [class.active]="currentImageIndex === i"
+            (click)="setImage(i)"
+          >
+            <img [src]="image" [alt]="'propertyDetail.gallery.thumbnailAlt' | translate" />
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="left-column">
+        <section class="card summary-card">
+          <div class="summary-header">
+            <div class="summary-badges">
+              <span class="badge type">{{ property.typeLabel | translate }}</span>
+              <span class="badge status">{{ property.statusLabel | translate }}</span>
+            </div>
+
+            <div class="price-box">
+              <div class="price">{{ property.price }}</div>
+              <div class="period">{{ property.period }}</div>
+            </div>
+          </div>
+
+          <h1>{{ property.title | translate }}</h1>
+          <p class="location">📍 {{ property.location | translate }}</p>
+
+          <div class="summary-features">
+            <span>🛏 {{ property.bedrooms }} {{ 'propertyDetail.features.bedroom' | translate }}</span>
+            <span>🛁 {{ property.bathrooms }} {{ 'propertyDetail.features.bathroom' | translate }}</span>
+            <span>◻ {{ property.size }}m²</span>
+            <span>📅 {{ property.availableDate }}</span>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>{{ 'propertyDetail.descriptionTitle' | translate }}</h2>
+          <p class="body-text">{{ property.description | translate }}</p>
+        </section>
+
+        <section class="card">
+          <h2>{{ 'propertyDetail.featuresTitle' | translate }}</h2>
+
+          <div class="amenities-grid">
+            @for (amenity of property.amenities; track amenity.label) {
+              <div class="amenity-item">
+                <span class="amenity-icon">{{ amenity.icon }}</span>
+                <span>{{ amenity.label | translate }}</span>
+              </div>
+            }
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>{{ 'propertyDetail.expensesTitle' | translate }}</h2>
+
+          <div class="expense-list">
+            @for (expense of property.expenses; track expense.label) {
+              <div class="expense-row">
+                <span>{{ expense.label | translate }}</span>
+                <span>{{ expense.amount }}</span>
+              </div>
+            }
+
+            <div class="expense-row total">
+              <span>{{ 'propertyDetail.expenses.total' | translate }}</span>
+              <span>{{ property.totalMonthly }}</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>{{ 'propertyDetail.rulesTitle' | translate }}</h2>
+
+          <ul class="rules-list">
+            @for (rule of property.rules; track rule) {
+              <li>{{ rule | translate }}</li>
+            }
+          </ul>
+        </section>
+      </div>
+
+      <aside class="right-column">
+        <section class="card contact-card">
+          <h2>{{ 'propertyDetail.contactTitle' | translate }}</h2>
+
+          <div class="owner-box">
+            <div class="owner-avatar">M</div>
+
+            <div class="owner-info">
+              <div class="owner-name">
+                {{ property.ownerName }}
+                <span class="verified">✓</span>
+              </div>
+              <div class="owner-response">
+                {{ 'propertyDetail.contact.responseTime' | translate }}: {{ property.responseTime }}
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-info">
+            <div class="contact-row">📞 {{ property.phone }}</div>
+            <div class="contact-row">✉ {{ property.email }}</div>
+          </div>
+
+          <div class="advice-box">
+            💡 {{ 'propertyDetail.contact.tip' | translate }}
+          </div>
+        </section>
+      </aside>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+  AbstractControl,
+  ValidationErrors
+} from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
@@ -12,46 +19,63 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   styleUrls: ['./register.css']
 })
 export class RegisterComponent {
-
   registerForm: FormGroup;
   showPassword = false;
   showConfirmPassword = false;
   selectedUserType: 'student' | 'landlord' = 'student';
+  submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private translate: TranslateService
   ) {
-    this.registerForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-      terms: [false, Validators.requiredTrue]
-    }, {
-      validators: this.passwordsMatch
-    });
+    this.registerForm = this.formBuilder.group(
+      {
+        fullName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
+        phone: ['', [Validators.required, Validators.pattern(/^[+0-9\s-]{7,20}$/)]],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(8)]],
+        confirmPassword: ['', [Validators.required]],
+        acceptTerms: [false, Validators.requiredTrue]
+      },
+      {
+        validators: this.passwordsMatchValidator
+      }
+    );
+
     this.translate.use('es');
   }
 
-  passwordsMatch(form: FormGroup) {
-    const pass = form.get('password')?.value;
-    const confirm = form.get('confirmPassword')?.value;
-    return pass === confirm ? null : { notMatching: true };
+  passwordsMatchValidator(control: AbstractControl): ValidationErrors | null {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassword')?.value;
+
+    if (!password || !confirmPassword) {
+      return null;
+    }
+
+    return password === confirmPassword ? null : { notMatching: true };
   }
 
-  selectUserType(type: 'student' | 'landlord') {
+  selectUserType(type: 'student' | 'landlord'): void {
     this.selectedUserType = type;
   }
 
-  onSubmit() {
+  onSubmit(): void {
+    this.submitted = true;
+
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
       return;
     }
 
-    console.log(this.registerForm.value);
+    const payload = {
+      ...this.registerForm.value,
+      userType: this.selectedUserType
+    };
+
+    console.log('Registro válido:', payload);
     this.router.navigate(['/login']);
   }
 
@@ -59,4 +83,20 @@ export class RegisterComponent {
     return this.registerForm.controls;
   }
 
+  hasError(controlName: string, errorName?: string): boolean {
+    const control = this.registerForm.get(controlName);
+
+    if (!control) return false;
+
+    if (errorName) {
+      return !!control.hasError(errorName) && (control.touched || this.submitted);
+    }
+
+    return !!control.invalid && (control.touched || this.submitted);
+  }
+
+  passwordsDoNotMatch(): boolean {
+    return !!this.registerForm.hasError('notMatching')
+      && (this.f['confirmPassword']?.touched || this.submitted);
+  }
 }

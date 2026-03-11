@@ -1,7 +1,13 @@
 <div class="register-page">
   <div class="register-container">
     <div class="register-header">
-      <img src="assets/images/logo.png" alt="Logo ConnectRoomies" class="logo" />
+      <div class="logo">
+        <img src="assets/images/logo.png" alt="Logo" class="logo-img" />
+        <span class="logo-text">
+          <strong>{{ 'logo.connect' | translate }}</strong><span>{{ 'logo.roomies' | translate }}</span>
+        </span>
+      </div>
+
       <h1>{{ 'register.title' | translate }}</h1>
       <p>{{ 'register.subtitle' | translate }}</p>
     </div>
@@ -21,7 +27,7 @@
           >
             <div class="user-type-icon">
               <img
-                src="assets/images/iconoPersonaRegistro.jpg"
+                src="assets/images/student.jpg"
                 [alt]="'register.userType.student.title' | translate"
               />
             </div>
@@ -37,7 +43,7 @@
           >
             <div class="user-type-icon">
               <img
-                src="assets/images/iconoCasaRegistro.jpg"
+                src="assets/images/landlord.jpg"
                 [alt]="'register.userType.landlord.title' | translate"
               />
             </div>
@@ -54,7 +60,18 @@
               type="text"
               formControlName="fullName"
               [placeholder]="'register.placeholders.fullName' | translate"
+              [class.input-error]="hasError('fullName')"
             />
+
+            @if (hasError('fullName', 'required')) {
+              <small class="error-text">{{ 'register.errors.fullNameRequired' | translate }}</small>
+            }
+            @if (hasError('fullName', 'minlength')) {
+              <small class="error-text">{{ 'register.errors.fullNameMinLength' | translate }}</small>
+            }
+            @if (hasError('fullName', 'maxlength')) {
+              <small class="error-text">{{ 'register.errors.fullNameMaxLength' | translate }}</small>
+            }
           </div>
 
           <div class="field">
@@ -64,7 +81,15 @@
               type="tel"
               formControlName="phone"
               [placeholder]="'register.placeholders.phone' | translate"
+              [class.input-error]="hasError('phone')"
             />
+
+            @if (hasError('phone', 'required')) {
+              <small class="error-text">{{ 'register.errors.phoneRequired' | translate }}</small>
+            }
+            @if (hasError('phone', 'pattern')) {
+              <small class="error-text">{{ 'register.errors.phoneInvalid' | translate }}</small>
+            }
           </div>
         </div>
 
@@ -75,7 +100,15 @@
             type="email"
             formControlName="email"
             [placeholder]="'register.placeholders.email' | translate"
+            [class.input-error]="hasError('email')"
           />
+
+          @if (hasError('email', 'required')) {
+            <small class="error-text">{{ 'register.errors.emailRequired' | translate }}</small>
+          }
+          @if (hasError('email', 'email')) {
+            <small class="error-text">{{ 'register.errors.emailInvalid' | translate }}</small>
+          }
         </div>
 
         <div class="form-grid two-cols">
@@ -87,6 +120,7 @@
                 [type]="showPassword ? 'text' : 'password'"
                 formControlName="password"
                 [placeholder]="'register.placeholders.password' | translate"
+                [class.input-error]="hasError('password')"
               />
               <button
                 type="button"
@@ -100,6 +134,13 @@
                 }}
               </button>
             </div>
+
+            @if (hasError('password', 'required')) {
+              <small class="error-text">{{ 'register.errors.passwordRequired' | translate }}</small>
+            }
+            @if (hasError('password', 'minlength')) {
+              <small class="error-text">{{ 'register.errors.passwordMinLength' | translate }}</small>
+            }
           </div>
 
           <div class="field">
@@ -110,6 +151,7 @@
                 [type]="showConfirmPassword ? 'text' : 'password'"
                 formControlName="confirmPassword"
                 [placeholder]="'register.placeholders.password' | translate"
+                [class.input-error]="hasError('confirmPassword') || passwordsDoNotMatch()"
               />
               <button
                 type="button"
@@ -123,10 +165,17 @@
                 }}
               </button>
             </div>
+
+            @if (hasError('confirmPassword', 'required')) {
+              <small class="error-text">{{ 'register.errors.confirmPasswordRequired' | translate }}</small>
+            }
+            @if (passwordsDoNotMatch()) {
+              <small class="error-text">{{ 'register.errors.passwordMismatch' | translate }}</small>
+            }
           </div>
         </div>
 
-        <label class="checkbox-row">
+        <label class="checkbox-row" [class.checkbox-error]="hasError('acceptTerms', 'required')">
           <input type="checkbox" formControlName="acceptTerms" />
           <span>
             {{ 'register.terms.prefix' | translate }}
@@ -135,6 +184,12 @@
             <a routerLink="/">{{ 'register.terms.privacyLink' | translate }}</a>
           </span>
         </label>
+
+        @if (hasError('acceptTerms', 'required')) {
+          <small class="error-text checkbox-error-text">
+            {{ 'register.errors.acceptTermsRequired' | translate }}
+          </small>
+        }
 
         <button type="submit" class="submit-btn">
           {{ 'register.actions.createAccount' | translate }}
