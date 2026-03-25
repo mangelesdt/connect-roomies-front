@@ -16,7 +16,7 @@ type Expense = {
 @Component({
   selector: 'app-property-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink, TranslateModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './property-detail.html',
   styleUrl: './property-detail.css'
 })

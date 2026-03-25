@@ -6,8 +6,9 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { TranslateModule, TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,14 @@ import { TranslateModule, TranslatePipe, TranslateService } from '@ngx-translate
 })
 export class LoginComponent {
 
-  constructor(private translate: TranslateService) {
+  loading = false;
+  errorMessage = '';
+  showPassword = false;
+
+  constructor(private translate: TranslateService,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.translate.use('es');
   }
 
@@ -34,10 +42,32 @@ export class LoginComponent {
     remember: new FormControl(false, { nonNullable: true })
   });
 
+  togglePassword(): void {
+    this.showPassword = !this.showPassword;
+  }
+
   submit(): void {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
     }
+
+    this.loading = true;
+    this.errorMessage = '';
+
+    this.authService.login({
+      email: this.loginForm.controls.email.value,
+      password: this.loginForm.controls.password.value
+    }).subscribe({
+      next: () => {
+        this.loading = false;
+        this.router.navigate(['/']);
+      },
+      error: (error) => {
+        this.loading = false;
+        this.errorMessage =
+          error?.error || 'No se ha podido iniciar sesión';
+      }
+    });
   }
 }

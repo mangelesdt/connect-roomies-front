@@ -10,12 +10,26 @@
     <div class="navbar-center">
         <ul class="nav-links">
             <li><a routerLink="/">{{ 'navbar.links.inicio' | translate }}</a></li>
-            <li><a routerLink="/publicar">{{ 'navbar.links.publicar' | translate }}</a></li>
+            @if (authService.isAdmin()) {
+              <li><a routerLink="/buscar">{{ 'navbar.links.buscar' | translate }}</a></li>
+            }
+            @if (authService.canPublish()) {
+              <li><a routerLink="/publicar">{{ 'navbar.links.publicar' | translate }}</a></li>
+            }
             <li><a routerLink="/sobre-nosotros">{{ 'navbar.links.sobre_nosotros' | translate }}</a></li>
         </ul>
     </div>
     <div class="navbar-right">
+      @if (!authService.isLogged()) {
         <a routerLink="/login" class="login">{{ 'navbar.buttons.login' | translate }}</a>
         <a routerLink="/registro" class="btn-register">{{ 'navbar.buttons.register' | translate }}</a>
+      } @else {
+        <span class="welcome">
+          {{ 'navbar.user.hola' | translate }}, {{ userName }}
+        </span>
+        <button class="btn-logout" (click)="logout()">
+          {{ 'navbar.user.logout' | translate }}
+        </button>
+      }
     </div>
 </nav>

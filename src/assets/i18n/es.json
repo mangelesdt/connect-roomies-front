@@ -4,18 +4,21 @@
         "roomies": "Roomies"
     },
     "login": {
-        "titulo": "Iniciar sesión",
-        "email":"Correo electrónico",
-        "emailPlaceholder":"tu@email.com",
-        "emailRequired":"El email es obligatorio",
-        "emailInvalid":"El email no es válido",
-        "password":"Contraseña",
-        "passwordPlaceholder":"••••••••",
-        "passwordError":"La contraseña es obligatoria",
-        "olvidaste":"¿Olvidaste tu contraseña?",
-        "boton":"Iniciar sesión",
-        "noCuenta":"¿No tienes una cuenta?",
-        "registrate":"Regístrate aquí"
+        "titulo": "Inicia sesión en tu cuenta",
+        "email": "Correo electrónico",
+        "emailPlaceholder": "Introduce tu correo",
+        "emailRequired": "El email es obligatorio",
+        "emailInvalid": "El email no es válido",
+        "password": "Contraseña",
+        "passwordPlaceholder": "Introduce tu contraseña",
+        "passwordError": "La contraseña es obligatoria",
+        "olvidaste": "¿Olvidaste tu contraseña?",
+        "boton": "Entrar",
+        "cargando": "Entrando...",
+        "noCuenta": "¿No tienes cuenta?",
+        "registrate": "Regístrate",
+        "mostrarPassword": "Mostrar contraseña",
+        "ocultarPassword": "Ocultar contraseña"
     },
     "register": {
         "title": "Crear cuenta",
@@ -76,13 +79,18 @@
     },
     "navbar": {
         "links": {
-            "inicio": "Inicio",
-            "publicar": "Publicar",
-            "sobre_nosotros": "Sobre nosotros"
+        "inicio": "Inicio",
+        "buscar": "Buscar",
+        "publicar": "Publicar",
+        "sobre_nosotros": "Sobre nosotros"
         },
         "buttons": {
-            "login": "Iniciar sesión",
-            "register": "Registrarse"
+        "login": "Iniciar sesión",
+        "register": "Registrarse"
+        },
+        "user": {
+        "hola": "Hola",
+        "logout": "Cerrar sesión"
         }
     },
     "footer": {

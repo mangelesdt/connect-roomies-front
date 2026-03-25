@@ -1,19 +1,31 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { TranslateModule, TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
-  imports: [CommonModule, ReactiveFormsModule, TranslateModule, TranslatePipe, RouterLink],
+  standalone: true,
+  imports: [CommonModule, RouterLink, TranslateModule],
   templateUrl: './navbar.html',
-  styleUrl: './navbar.css',
+  styleUrls: ['./navbar.css']
 })
 export class NavbarComponent {
+  constructor(
+    public authService: AuthService,
+    private router: Router
+  ) {}
 
-  constructor(private translate: TranslateService) {
-    this.translate.use('es');
+  get userName(): string {
+    return this.authService.getUser()?.nombre ?? '';
   }
 
+  logout(): void {
+    this.authService.logout();
+
+    this.router.navigate(['/login'], {
+      replaceUrl: true
+    });
+  }
 }
