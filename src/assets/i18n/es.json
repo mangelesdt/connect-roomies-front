@@ -119,7 +119,15 @@
         "filtros": {
             "ciudad": "Ciudad",
             "precioMax": "Precio máximo",
-            "tipo": "Tipo de vivienda"
+            "tipo": "Tipo de vivienda",
+            "tipoTodos": "Todos",
+            "apartamento": "Apartamento",
+            "piso": "Piso",
+            "habitacion": "Habitación",
+            "loft": "Loft",
+            "recientes": "Más recientes",
+            "precioAsc": "Precio ascendente",
+            "precioDesc": "Precio descendente"
         },
         "resultados": {
             "encontradas": "viviendas encontradas"

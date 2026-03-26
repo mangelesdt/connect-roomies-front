@@ -194,6 +194,12 @@
   color: #555;
 }
 
+.meta img {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
 .precio-row {
   display: flex;
   justify-content: space-between;

@@ -9,9 +9,11 @@ import { authGuard } from './core/guards/auth-guard';
 import { publishGuard } from './core/guards/rol-guard';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [authGuard] },
+  
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegisterComponent },
+  { path: 'home', component: HomeComponent, canActivate: [authGuard] },
   { path: 'publicar', component: PublishComponent, canActivate: [publishGuard] },
   { path: 'sobre-nosotros', component: AboutUsComponent },
   { path: 'vivienda/:id', component: PropertyDetailComponent },

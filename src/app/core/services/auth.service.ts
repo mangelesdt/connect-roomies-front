@@ -16,15 +16,19 @@ export class AuthService {
   ) {}
 
   login(data: LoginRequest): Observable<LoginResponse> {
+    const basicAuth = btoa(`${data.email}:${data.password}`);
+
     return this.http.post<LoginResponse>(`${this.apiUrl}/api/auth/login`, data).pipe(
       tap((user) => {
         localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('basicAuth', basicAuth);
       })
     );
   }
 
   logout(): void {
     localStorage.removeItem('user');
+    localStorage.removeItem('basicAuth');
   }
 
   getUser(): LoginResponse | null {
@@ -45,11 +49,11 @@ export class AuthService {
   }
 
   isArrendador(): boolean {
-    return this.getRole() === 'USUARIO';
+    return this.getRole() === 'PROPIETARIO';
   }
 
   isArrendatario(): boolean {
-    return this.getRole() === 'PROPIETARIO';
+    return this.getRole() === 'USUARIO';
   }
 
   canPublish(): boolean {

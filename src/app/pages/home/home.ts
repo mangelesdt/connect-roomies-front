@@ -3,15 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
-
-interface Vivienda {
-  id: number;
-  titulo: string;
-  ciudad: string;
-  precio: number;
-  tipo: string;
-  imagen: string;
-}
+import { Vivienda } from '../../core/interfaces/vivienda.interface';
+import { ViviendaService } from '../../core/services/vivienda.service';
 
 @Component({
   selector: 'app-home',
@@ -23,33 +16,19 @@ interface Vivienda {
 export class HomeComponent {
 
   filtroForm: FormGroup;
-
-  viviendas: Vivienda[] = [
-  {
-    id: 1,
-    titulo: 'Apartamento moderno',
-    ciudad: 'Madrid',
-    precio: 750,
-    tipo: 'Apartamento',
-    imagen: 'assets/images/house1.jpg'
-  },
-  {
-    id: 2,
-    titulo: 'Piso céntrico',
-    ciudad: 'Barcelona',
-    precio: 900,
-    tipo: 'Piso',
-    imagen: 'assets/images/house2.jpg'
-  }
-];
-
+  loading = false;
+  errorMessage = '';
+  viviendas: Vivienda[] = [];
   viviendasFiltradas: Vivienda[] = [];
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+      private fb: FormBuilder,
+      private viviendaService: ViviendaService) {
     this.filtroForm = this.fb.group({
       ciudad: [''],
       precioMax: [''],
-      tipo: ['']
+      tipo: [''],
+      ordenar: ['recientes']
     });
 
     this.viviendasFiltradas = this.viviendas;
@@ -58,16 +37,43 @@ export class HomeComponent {
       this.filtrar();
     });
   }
+  ngOnInit(): void {
+    this.cargarViviendas();
+  }
+
+  cargarViviendas(): void {
+    this.loading = true;
+    this.errorMessage = '';
+
+    this.viviendaService.getViviendas().subscribe({
+      next: (data) => {
+        this.viviendas = data.filter(v => v.disponible === 1);
+        this.viviendasFiltradas = [...this.viviendas];
+        this.loading = false;
+      },
+      error: () => {
+        this.errorMessage = 'Error cargando viviendas';
+        this.loading = false;
+      }
+    });
+  }
 
   filtrar() {
-    const { ciudad, precioMax, tipo } = this.filtroForm.value;
+    const { ciudad, precioMax, tipo, ordenar } = this.filtroForm.value;
 
-    this.viviendasFiltradas = this.viviendas.filter(v => {
-      return (
-        (!ciudad || v.ciudad.toLowerCase().includes(ciudad.toLowerCase())) &&
-        (!precioMax || v.precio <= precioMax) &&
-        (!tipo || v.tipo === tipo)
-      );
-    });
+    let resultado = this.viviendas.filter(v =>
+      (!ciudad || v.localidad.toLowerCase().includes(ciudad.toLowerCase())) &&
+      (!precioMax || v.precio <= precioMax) &&
+      (!tipo || v.tipo === tipo)
+    );
+
+    if (ordenar === 'precio-asc') resultado.sort((a, b) => a.precio - b.precio);
+    if (ordenar === 'precio-desc') resultado.sort((a, b) => b.precio - a.precio);
+    if (ordenar === 'recientes') resultado.sort((a, b) =>
+      new Date(b.fechaCreacion).getTime() - new Date(a.fechaCreacion).getTime()
+    );
+
+    this.viviendasFiltradas = resultado;
+
   }
 }

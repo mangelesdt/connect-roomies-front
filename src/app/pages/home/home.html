@@ -21,10 +21,10 @@
       <div class="form-group">
         <label>{{ 'home.filtros.tipo' | translate }}</label>
         <select formControlName="tipo">
-          <option value="Apartamento">Apartamento</option>
-          <option value="Piso">Piso</option>
-          <option value="Habitación">Habitación</option>
-          <option value="Loft">Loft</option>
+          <option value="Apartamento">{{ 'home.filtros.apartamento' | translate }}</option>
+          <option value="Piso">{{ 'home.filtros.piso' | translate }}</option>
+          <option value="Habitación">{{ 'home.filtros.habitacion' | translate }}</option>
+          <option value="Loft">{{ 'home.filtros.loft' | translate }}</option>
         </select>
       </div>
 
@@ -34,7 +34,7 @@
       </div>
 
       <div class="form-group mt-4">
-        <button type="button" class="btn-clear" (click)="filtroForm.reset()">
+        <button type="button" class="btn-clear" (click)="filtroForm.reset({ ciudad:'', precioMax:'', tipo:'', ordenar:'recientes' })">
           Limpiar
         </button>
       </div>
@@ -51,12 +51,13 @@
         {{ viviendasFiltradas.length }}
         {{ 'home.resultados.encontradas' | translate }}
       </p>
-
-      <select class="ordenar">
-        <option>Más recientes</option>
-        <option>Precio ascendente</option>
-        <option>Precio descendente</option>
-      </select>
+      <form [formGroup]="filtroForm">
+        <select class="ordenar" formControlName="ordenar">
+          <option value="recientes" selected>{{ 'home.filtros.recientes' | translate }}</option>
+          <option value="precio-asc">{{ 'home.filtros.precioAsc' | translate }}</option>
+          <option value="precio-desc">{{ 'home.filtros.precioDesc' | translate }}</option>
+        </select>
+      </form>
     </div>
 
 
@@ -68,18 +69,18 @@
         <div class="card">
 
           <div class="img-container">
-            <img [src]="vivienda.imagen" alt="Vivienda">
+            <img [src]="vivienda.imagenesVivienda.length ? vivienda.imagenesVivienda[0].urlImg : 'assets/images/house-placeholder.jpg'"  alt="Vivienda"/>
             <span class="badge">{{ vivienda.tipo }}</span>
           </div>
 
           <div class="card-content">
             <h3>{{ vivienda.titulo }}</h3>
-            <p class="ciudad">{{ vivienda.ciudad }}</p>
+            <p class="ciudad">{{ vivienda.localidad }}</p>
 
-            <div class="meta">
-              <span>🛏 1</span>
-              <span>🛁 1</span>
-              <span>📐 30m²</span>
+            <div class="meta"> // PENDIENTE: Reemplazar con datos reales de la vivienda
+              <span><img src="assets/images/cama.jpg" alt="Logo"> 1</span>
+              <span><img src="assets/images/ducha.jpg" alt="Logo"> 1</span>
+              <span><img src="assets/images/superficie.jpg" alt="Logo"> 30m²</span>
             </div>
 
             <div class="precio-row">
