@@ -78,7 +78,7 @@ export class PropertyDetailComponent {
   }
 
   goBack(): void {
-    this.router.navigate(['/']);
+    this.router.navigate(['/home']);
   }
 
   setImage(index: number): void {

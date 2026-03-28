@@ -15,6 +15,11 @@ export interface Vivienda {
   disponible: number;
   fechaCreacion: string;
   imagenesVivienda: ImagenVivienda[];
+  descripcion: string;
+  metros: number;
+  banos: number;
+  habitacionesTotales: number;
+  normas: string;
 }
 
 export interface ImagenVivienda {

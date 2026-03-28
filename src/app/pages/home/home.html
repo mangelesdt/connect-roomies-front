@@ -77,10 +77,10 @@
             <h3>{{ vivienda.titulo }}</h3>
             <p class="ciudad">{{ vivienda.localidad }}</p>
 
-            <div class="meta"> // PENDIENTE: Reemplazar con datos reales de la vivienda
-              <span><img src="assets/images/cama.jpg" alt="Logo"> 1</span>
-              <span><img src="assets/images/ducha.jpg" alt="Logo"> 1</span>
-              <span><img src="assets/images/superficie.jpg" alt="Logo"> 30m²</span>
+            <div class="meta">
+              <span><img src="assets/images/cama.jpg" alt="Logo"> {{ vivienda.habitacionesTotales }}</span>
+              <span><img src="assets/images/ducha.jpg" alt="Logo"> {{ vivienda.banos }}</span>
+              <span><img src="assets/images/superficie.jpg" alt="Logo"> {{ vivienda.metros }}m²</span>
             </div>
 
             <div class="precio-row">
