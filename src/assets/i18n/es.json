@@ -26,25 +26,27 @@
         "userType": {
             "title": "Tipo de usuario",
             "student": {
-            "title": "Estudiante",
+            "title": "Arrendador",
             "subtitle": "Busco vivienda"
             },
             "landlord": {
-            "title": "Arrendador",
+            "title": "Arrendatario",
             "subtitle": "Ofrezco vivienda"
             }
         },
         "fields": {
-            "fullName": "Nombre completo",
+            "name": "Nombre",
+            "lastName": "Apellidos",
             "phone": "Teléfono",
             "email": "Email",
             "password": "Contraseña",
             "confirmPassword": "Confirmar contraseña"
         },
         "placeholders": {
-            "fullName": "Juan Pérez",
-            "phone": "600 000 000",
-            "email": "tu@email.com",
+            "name": "Tu nombre",
+            "lastName": "Tus apellidos",
+            "phone": "Tu teléfono",
+            "email": "Tu email",
             "password": "••••••••"
         },
         "terms": {
@@ -63,9 +65,12 @@
             "link": "Inicia sesión"
         },
         "errors": {
-            "fullNameRequired": "El nombre completo es obligatorio",
-            "fullNameMinLength": "El nombre debe tener al menos 3 caracteres",
-            "fullNameMaxLength": "El nombre no puede superar los 60 caracteres",
+            "nameRequired": "El nombre es obligatorio",
+            "lastNameRequired": "Los apellidos son obligatorios",
+            "nameMinLength": "El nombre debe tener al menos 3 caracteres",
+            "nameMaxLength": "El nombre no puede superar los 60 caracteres",
+            "lastNameMinLength": "Los apellidos deben tener al menos 3 caracteres",
+            "lastNameMaxLength": "Los apellidos no pueden superar los 60 caracteres",
             "phoneRequired": "El teléfono es obligatorio",
             "phoneInvalid": "Introduce un teléfono válido",
             "emailRequired": "El email es obligatorio",

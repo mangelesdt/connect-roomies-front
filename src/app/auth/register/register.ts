@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -22,17 +23,20 @@ export class RegisterComponent {
   registerForm: FormGroup;
   showPassword = false;
   showConfirmPassword = false;
-  selectedUserType: 'student' | 'landlord' = 'student';
+  selectedUserType: 'arrendador' | 'arrendatario' = 'arrendatario';
   submitted = false;
+  errorMessage = '';
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private authService: AuthService
   ) {
     this.registerForm = this.formBuilder.group(
       {
-        fullName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
+        name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
+        lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
         phone: ['', [Validators.required, Validators.pattern(/^[+0-9\s-]{7,20}$/)]],
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(8)]],
@@ -58,25 +62,32 @@ export class RegisterComponent {
     return password === confirmPassword ? null : { notMatching: true };
   }
 
-  selectUserType(type: 'student' | 'landlord'): void {
+  selectUserType(type: 'arrendador' | 'arrendatario'): void {
     this.selectedUserType = type;
   }
 
   onSubmit(): void {
     this.submitted = true;
+    this.errorMessage = '';
 
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
       return;
     }
 
-    const payload = {
-      ...this.registerForm.value,
-      userType: this.selectedUserType
-    };
-
-    console.log('Registro válido:', payload);
-    this.router.navigate(['/login']);
+    this.authService.register({
+      nombre: this.registerForm.value.name,
+      apellidos: this.registerForm.value.lastName,
+      telefono: this.registerForm.value.phone,
+      email: this.registerForm.value.email,
+      password: this.registerForm.value.password,
+      rol: this.selectedUserType === 'arrendador' ? 'PROPIETARIO' : 'USUARIO'
+    }).subscribe({
+      next: (res) => { console.log('OK', res); 
+        this.router.navigate(['/login'], { queryParams: { email: this.registerForm.value.email }}); 
+      },
+      error: (err) => { console.log('ERROR', err); this.errorMessage = 'Error al registrar usuario'; }
+    });
   }
 
   get f() {

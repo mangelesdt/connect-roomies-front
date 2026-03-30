@@ -12,10 +12,16 @@
     <div class="footer-links">
       <h3>{{ 'footer.quickLinks' | translate }}</h3>
       <ul>
-        <li><a href="#">{{ 'footer.home' | translate }}</a></li>
-        <li><a href="#">{{ 'footer.findHousing' | translate }}</a></li>
-        <li><a routerLink="/publicar">{{ 'footer.postAd' | translate }}</a></li>
-        <li><a routerLink="/sobre-nosotros">{{ 'footer.aboutUs' | translate }}</a></li>
+        <ul class="nav-links">
+            <li><a routerLink="/home">{{ 'navbar.links.inicio' | translate }}</a></li>
+            @if (authService.isAdmin()) {
+              <li><a routerLink="/buscar">{{ 'navbar.links.buscar' | translate }}</a></li>
+            }
+            @if (authService.canPublish()) {
+              <li><a routerLink="/publicar">{{ 'navbar.links.publicar' | translate }}</a></li>
+            }
+            <li><a routerLink="/sobre-nosotros">{{ 'navbar.links.sobre_nosotros' | translate }}</a></li>
+        </ul>
       </ul>
     </div>
 

@@ -9,7 +9,7 @@
     </div>
     <div class="navbar-center">
         <ul class="nav-links">
-            <li><a routerLink="/">{{ 'navbar.links.inicio' | translate }}</a></li>
+            <li><a routerLink="/home">{{ 'navbar.links.inicio' | translate }}</a></li>
             @if (authService.isAdmin()) {
               <li><a routerLink="/buscar">{{ 'navbar.links.buscar' | translate }}</a></li>
             }

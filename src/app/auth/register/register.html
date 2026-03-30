@@ -22,8 +22,8 @@
           <button
             type="button"
             class="user-type-card"
-            [class.active]="selectedUserType === 'student'"
-            (click)="selectUserType('student')"
+            [class.active]="selectedUserType === 'arrendatario'"
+            (click)="selectUserType('arrendatario')"
           >
             <div class="user-type-icon">
               <img
@@ -38,8 +38,8 @@
           <button
             type="button"
             class="user-type-card"
-            [class.active]="selectedUserType === 'landlord'"
-            (click)="selectUserType('landlord')"
+            [class.active]="selectedUserType === 'arrendador'"
+            (click)="selectUserType('arrendador')"
           >
             <div class="user-type-icon">
               <img
@@ -54,63 +54,71 @@
 
         <div class="form-grid two-cols">
           <div class="field">
-            <label for="fullName">{{ 'register.fields.fullName' | translate }}</label>
+            <label for="name">{{ 'register.fields.name' | translate }}</label>
             <input
-              id="fullName"
+              id="name"
               type="text"
-              formControlName="fullName"
-              [placeholder]="'register.placeholders.fullName' | translate"
-              [class.input-error]="hasError('fullName')"
+              formControlName="name"
+              [placeholder]="'register.placeholders.name' | translate"
+              [class.input-error]="hasError('name')"
             />
 
-            @if (hasError('fullName', 'required')) {
-              <small class="error-text">{{ 'register.errors.fullNameRequired' | translate }}</small>
-            }
-            @if (hasError('fullName', 'minlength')) {
-              <small class="error-text">{{ 'register.errors.fullNameMinLength' | translate }}</small>
-            }
-            @if (hasError('fullName', 'maxlength')) {
-              <small class="error-text">{{ 'register.errors.fullNameMaxLength' | translate }}</small>
+            @if (hasError('name', 'required')) {
+              <small class="error-text">{{ 'register.errors.nameRequired' | translate }}</small>
             }
           </div>
-
           <div class="field">
-            <label for="phone">{{ 'register.fields.phone' | translate }}</label>
+            <label for="lastName">{{ 'register.fields.lastName' | translate }}</label>
             <input
-              id="phone"
-              type="tel"
-              formControlName="phone"
-              [placeholder]="'register.placeholders.phone' | translate"
-              [class.input-error]="hasError('phone')"
+              id="lastName"
+              type="text"
+              formControlName="lastName"
+              [placeholder]="'register.placeholders.lastName' | translate"
+              [class.input-error]="hasError('lastName')"
             />
 
-            @if (hasError('phone', 'required')) {
-              <small class="error-text">{{ 'register.errors.phoneRequired' | translate }}</small>
-            }
-            @if (hasError('phone', 'pattern')) {
-              <small class="error-text">{{ 'register.errors.phoneInvalid' | translate }}</small>
+            @if (hasError('lastName', 'required')) {
+              <small class="error-text">{{ 'register.errors.lastNameRequired' | translate }}</small>
             }
           </div>
+          
         </div>
+        <div class="form-grid two-cols">
+          <div class="field">
+            <label for="email">{{ 'register.fields.email' | translate }}</label>
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              [placeholder]="'register.placeholders.email' | translate"
+              [class.input-error]="hasError('email')"
+            />
 
-        <div class="field">
-          <label for="email">{{ 'register.fields.email' | translate }}</label>
-          <input
-            id="email"
-            type="email"
-            formControlName="email"
-            [placeholder]="'register.placeholders.email' | translate"
-            [class.input-error]="hasError('email')"
-          />
+            @if (hasError('email', 'required')) {
+              <small class="error-text">{{ 'register.errors.emailRequired' | translate }}</small>
+            }
+            @if (hasError('email', 'email')) {
+              <small class="error-text">{{ 'register.errors.emailInvalid' | translate }}</small>
+            }
+          </div>
+          <div class="field">
+              <label for="phone">{{ 'register.fields.phone' | translate }}</label>
+              <input
+                id="phone"
+                type="tel"
+                formControlName="phone"
+                [placeholder]="'register.placeholders.phone' | translate"
+                [class.input-error]="hasError('phone')"
+              />
 
-          @if (hasError('email', 'required')) {
-            <small class="error-text">{{ 'register.errors.emailRequired' | translate }}</small>
-          }
-          @if (hasError('email', 'email')) {
-            <small class="error-text">{{ 'register.errors.emailInvalid' | translate }}</small>
-          }
+              @if (hasError('phone', 'required')) {
+                <small class="error-text">{{ 'register.errors.phoneRequired' | translate }}</small>
+              }
+              @if (hasError('phone', 'pattern')) {
+                <small class="error-text">{{ 'register.errors.phoneInvalid' | translate }}</small>
+              }
+          </div>
         </div>
-
         <div class="form-grid two-cols">
           <div class="field">
             <label for="password">{{ 'register.fields.password' | translate }}</label>

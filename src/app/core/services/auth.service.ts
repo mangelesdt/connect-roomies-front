@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { LoginRequest, LoginResponse, UserRole } from '../interfaces/auth.interface';
+import { LoginRequest, LoginResponse, RegisterRequest, UserRole } from '../interfaces/auth.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -59,5 +59,9 @@ export class AuthService {
   canPublish(): boolean {
     const role = this.getRole();
     return role === 'ADMIN' || role === 'PROPIETARIO';
+  }
+
+  register(data: RegisterRequest) {
+    return this.http.post(`${environment.apiUrl}/api/usuarios`, data, { responseType: 'text' });
   }
 }

@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslateModule, TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../core/services/auth.service';
 
@@ -25,9 +25,17 @@ export class LoginComponent {
 
   constructor(private translate: TranslateService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.translate.use('es');
+  }
+
+  ngOnInit(): void {
+    const email = this.route.snapshot.queryParamMap.get('email');
+    if (email) {
+      this.loginForm.controls.email.setValue(email);
+    }
   }
 
   loginForm = new FormGroup({
@@ -41,6 +49,7 @@ export class LoginComponent {
     }),
     remember: new FormControl(false, { nonNullable: true })
   });
+  
 
   togglePassword(): void {
     this.showPassword = !this.showPassword;

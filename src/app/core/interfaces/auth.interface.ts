@@ -11,3 +11,12 @@ export interface LoginResponse {
   email: string;
   rol: UserRole;
 }
+
+export interface RegisterRequest {
+  nombre: string;
+  apellidos: string;
+  telefono: string;
+  email: string;
+  password: string;
+  rol?: UserRole;
+}
