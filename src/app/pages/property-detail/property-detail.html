@@ -1,142 +1,160 @@
-<div class="detail-page">
-  <div class="detail-topbar">
-    <button type="button" class="back-button" (click)="goBack()">
-      ← {{ 'propertyDetail.back' | translate }}
-    </button>
-  </div>
+<div class="property-detail-page">
 
-  <div class="detail-container">
-    <div class="gallery-card">
-      <div class="main-image-wrapper">
-        <img
-          [src]="property.images[currentImageIndex]"
-          [alt]="'propertyDetail.gallery.imageAlt' | translate"
-          class="main-image"
-        />
+  @if (loading) {
+    <div class="state-box">
+      <p>Cargando vivienda...</p>
+    </div>
+  }
 
-        <button type="button" class="gallery-arrow left" (click)="prevImage()">‹</button>
-        <button type="button" class="gallery-arrow right" (click)="nextImage()">›</button>
+  @if (!loading && errorMessage) {
+    <div class="state-box error">
+      <p>{{ errorMessage }}</p>
+      <button type="button" class="btn-back" (click)="goBack()">
+        Volver
+      </button>
+    </div>
+  }
 
-        <div class="image-counter">
-          {{ currentImageIndex + 1 }}/{{ property.images.length }}
+  @if (!loading && vivienda) {
+
+    <div class="detail-container">
+      <div class="top-bar">
+        <a class="back-link" (click)="goBack()">
+          <img src="assets/images/atras.png" alt="atras"> {{ 'publish.back' | translate }}
+        </a>
+      </div>
+
+      <!-- GALERÍA -->
+      <section class="gallery-section">
+        <div class="main-image-wrapper">
+          <img class="main-image" [src]="imagenPrincipal" [alt]="vivienda.titulo">
+
+          @if (vivienda.imagenesVivienda.length > 0) {
+            <div class="image-counter">
+              {{ imagenSeleccionada + 1 }} / {{ vivienda.imagenesVivienda.length }}
+            </div>
+          }
         </div>
-      </div>
 
-      <div class="thumbnails">
-        @for (image of property.images; track image; let i = $index) {
-          <button
-            type="button"
-            class="thumb-btn"
-            [class.active]="currentImageIndex === i"
-            (click)="setImage(i)"
-          >
-            <img [src]="image" [alt]="'propertyDetail.gallery.thumbnailAlt' | translate" />
-          </button>
+        @if (vivienda.imagenesVivienda && vivienda.imagenesVivienda.length > 1) {
+          <div class="thumbnails">
+            @for (imagen of vivienda.imagenesVivienda; track imagen.id; let i = $index) {
+              <button
+                type="button"
+                class="thumb"
+                [class.active]="i === imagenSeleccionada"
+                (click)="seleccionarImagen(i)"
+              >
+                <img [src]="imagen.urlImg" [alt]="'Imagen ' + (i + 1)">
+              </button>
+            }
+          </div>
         }
+      </section>
+
+      <!-- CONTENIDO -->
+      <div class="content-layout">
+
+        <!-- COLUMNA IZQUIERDA -->
+        <div class="left-column">
+
+          <!-- RESUMEN -->
+          <section class="card summary-card">
+            <div class="summary-top">
+              <div class="badges">
+                <span class="badge badge-type">{{ vivienda.tipo }}</span>
+                <span class="badge badge-status">Disponible</span>
+              </div>
+
+              <div class="price-box">
+                <span class="price">{{ vivienda.precio }}€</span>
+                <span class="price-unit">/mes</span>
+              </div>
+            </div>
+
+            <h1 class="title">{{ vivienda.titulo }}</h1>
+
+            <p class="location">
+              <img src="assets/images/localizacion.png" alt="Logo"> {{ vivienda.localidad }} - {{ vivienda.provincia }}
+            </p>
+
+            <div class="divider"></div>
+
+            <div class="meta-row">
+              <span><img src="assets/images/cama.jpg" alt="Logo"> {{ vivienda.habitacionesTotales ?? 1 }} habitación</span>
+              <span><img src="assets/images/ducha.jpg" alt="Logo"> {{ vivienda.banos ?? 1 }} baño</span>
+              <span><img src="assets/images/superficie.jpg" alt="Logo"> {{ vivienda.metros ?? '-' }}m²</span>
+              <span><img src="assets/images/calendario.png" alt="Logo"> {{ vivienda.fechaCreacion | date:'d \'de\' MMMM yyyy' }}</span>
+            </div>
+          </section>
+
+          <!-- DESCRIPCIÓN -->
+          @if (vivienda.descripcion) {
+            <section class="card">
+              <h2>Descripción</h2>
+              <p class="description-text">{{ vivienda.descripcion }}</p>
+            </section>
+          }
+
+          <!-- CARACTERÍSTICAS -->
+          @if (comodidadesMostrables.length > 0) {
+            <section class="card">
+              <h2>Características</h2>
+
+              <div class="features-grid">
+                @for (comodidad of comodidadesMostrables; track comodidad) {
+                  <div class="feature-item">
+                    <span class="feature-icon">{{ getAmenityIcon(comodidad) }}</span>
+                    <span>{{ getAmenityLabel(comodidad) }}</span>
+                  </div>
+                }
+              </div>
+            </section>
+          }
+
+          <!-- NORMAS -->
+          @if (vivienda.normas) {
+            <section class="card">
+              <h2>Normas</h2>
+              <p class="description-text">{{ vivienda.normas }}</p>
+            </section>
+          }
+
+        </div>
+
+        <!-- COLUMNA DERECHA -->
+        <aside class="right-column">
+          @if (vivienda.propietario) {
+            <section class="card contact-card">
+              <h2>Contactar con el arrendador</h2>
+
+              <div class="owner-box">
+                <div class="owner-avatar">
+                  {{ vivienda.propietario.nombre.charAt(0) }}
+                </div>
+
+                <div class="owner-info">
+                  <p class="owner-name">
+                    {{ vivienda.propietario.nombre }}
+                    <span class="verified">✓</span>
+                  </p>
+                  <p class="owner-response">Tiempo de respuesta: 1-2 horas</p>
+                </div>
+              </div>
+
+              <div class="contact-data">
+                <p><img src="assets/images/telefono.png" alt="Logo"> {{ vivienda.propietario.telefono }}</p>
+                <p><img src="assets/images/correo.png" alt="Logo"> {{ vivienda.propietario.email }}</p>
+              </div>
+
+              <div class="advice-box">
+                <img src="assets/images/bombilla.png" alt="Logo"> Consejo: Siempre visita la propiedad antes de hacer cualquier pago.
+              </div>
+            </section>
+          }
+        </aside>
+
       </div>
     </div>
-
-    <div class="content-grid">
-      <div class="left-column">
-        <section class="card summary-card">
-          <div class="summary-header">
-            <div class="summary-badges">
-              <span class="badge type">{{ property.typeLabel | translate }}</span>
-              <span class="badge status">{{ property.statusLabel | translate }}</span>
-            </div>
-
-            <div class="price-box">
-              <div class="price">{{ property.price }}</div>
-              <div class="period">{{ property.period }}</div>
-            </div>
-          </div>
-
-          <h1>{{ property.title | translate }}</h1>
-          <p class="location">📍 {{ property.location | translate }}</p>
-
-          <div class="summary-features">
-            <span>🛏 {{ property.bedrooms }} {{ 'propertyDetail.features.bedroom' | translate }}</span>
-            <span>🛁 {{ property.bathrooms }} {{ 'propertyDetail.features.bathroom' | translate }}</span>
-            <span>◻ {{ property.size }}m²</span>
-            <span>📅 {{ property.availableDate }}</span>
-          </div>
-        </section>
-
-        <section class="card">
-          <h2>{{ 'propertyDetail.descriptionTitle' | translate }}</h2>
-          <p class="body-text">{{ property.description | translate }}</p>
-        </section>
-
-        <section class="card">
-          <h2>{{ 'propertyDetail.featuresTitle' | translate }}</h2>
-
-          <div class="amenities-grid">
-            @for (amenity of property.amenities; track amenity.label) {
-              <div class="amenity-item">
-                <span class="amenity-icon">{{ amenity.icon }}</span>
-                <span>{{ amenity.label | translate }}</span>
-              </div>
-            }
-          </div>
-        </section>
-
-        <section class="card">
-          <h2>{{ 'propertyDetail.expensesTitle' | translate }}</h2>
-
-          <div class="expense-list">
-            @for (expense of property.expenses; track expense.label) {
-              <div class="expense-row">
-                <span>{{ expense.label | translate }}</span>
-                <span>{{ expense.amount }}</span>
-              </div>
-            }
-
-            <div class="expense-row total">
-              <span>{{ 'propertyDetail.expenses.total' | translate }}</span>
-              <span>{{ property.totalMonthly }}</span>
-            </div>
-          </div>
-        </section>
-
-        <section class="card">
-          <h2>{{ 'propertyDetail.rulesTitle' | translate }}</h2>
-
-          <ul class="rules-list">
-            @for (rule of property.rules; track rule) {
-              <li>{{ rule | translate }}</li>
-            }
-          </ul>
-        </section>
-      </div>
-
-      <aside class="right-column">
-        <section class="card contact-card">
-          <h2>{{ 'propertyDetail.contactTitle' | translate }}</h2>
-
-          <div class="owner-box">
-            <div class="owner-avatar">M</div>
-
-            <div class="owner-info">
-              <div class="owner-name">
-                {{ property.ownerName }}
-                <span class="verified">✓</span>
-              </div>
-              <div class="owner-response">
-                {{ 'propertyDetail.contact.responseTime' | translate }}: {{ property.responseTime }}
-              </div>
-            </div>
-          </div>
-
-          <div class="contact-info">
-            <div class="contact-row">📞 {{ property.phone }}</div>
-            <div class="contact-row">✉ {{ property.email }}</div>
-          </div>
-
-          <div class="advice-box">
-            💡 {{ 'propertyDetail.contact.tip' | translate }}
-          </div>
-        </section>
-      </aside>
-    </div>
-  </div>
+  }
 </div>

@@ -87,6 +87,7 @@
         "inicio": "Inicio",
         "buscar": "Buscar",
         "publicar": "Publicar",
+        "perfil": "Perfil",
         "sobre_nosotros": "Sobre nosotros"
         },
         "buttons": {
@@ -105,6 +106,7 @@
         "home": "Inicio",
         "findHousing": "Buscar viviendas",
         "postAd": "Publicar anuncio",
+        "profile": "Perfil",
         "aboutUs": "Sobre nosotros",
         "support": "Soporte",
         "helpCenter": "Centro de ayuda",
@@ -140,87 +142,71 @@
         "verDetalle": "Ver detalles"
     },
     "publish": {
-        "title": "Publicar propiedad",
-        "subtitle": "Completa la información de tu propiedad para comenzar a recibir solicitudes",
+        "title": "Publicar vivienda",
+        "editTitle": "Editar vivienda",
+        "subtitle": "Completa los datos para publicar tu vivienda",
+
         "back": "Volver",
-        "cancel": "Cancelar",
-        "submit": "Publicar propiedad",
+
         "basicInfo": {
             "title": "Información básica",
-            "adTitle": "Título del anuncio",
-            "adTitlePlaceholder": "Ej: Habitación luminosa cerca de la universidad",
-            "housingType": "Tipo de vivienda",
-            "selectType": "Selecciona un tipo",
-            "zone": "Zona",
-            "selectZone": "Selecciona una zona",
-            "fullAddress": "Dirección completa",
-            "fullAddressPlaceholder": "Calle, número, piso"
+            "adTitle": "Título",
+            "housingType": "Tipo",
+            "selectType": "Selecciona tipo",
+            "address": "Dirección",
+            "city": "Localidad",
+            "province": "Provincia",
+            "postalCode": "Código postal"
         },
+
         "features": {
             "title": "Características",
             "rooms": "Habitaciones",
             "bathrooms": "Baños",
-            "size": "Tamaño (m²)",
-            "price": "Precio/mes (€)",
-            "availableFrom": "Disponible desde"
+            "size": "Metros",
+            "price": "Precio"
         },
+
         "amenities": {
             "title": "Comodidades",
-            "subtitle": "Selecciona las comodidades disponibles"
+            "wifi": "WiFi",
+            "airConditioning": "Aire acondicionado",
+            "heating": "Calefacción",
+            "parking": "Parking",
+            "tv": "TV",
+            "furnished": "Amueblado"
         },
+
+        "housingType": {
+            "room": "Habitación",
+            "flat": "Piso",
+            "apartment": "Apartamento",
+            "house": "Casa"
+        },
+
         "images": {
             "title": "Imágenes",
-            "subtitle": "Añade fotos de calidad para atraer más interesados (mínimo 3 imágenes)",
-            "clickUpload": "Haz clic para subir imágenes",
-            "dragDrop": "o arrastra y suelta aquí",
-            "formats": "JPG, PNG o WEBP (máx. 5MB)",
-            "selectedFiles": "Archivos seleccionados:"
+            "upload": "Selecciona imágenes",
+            "selected": "Archivos seleccionados"
         },
+
         "description": {
-            "title": "Descripción",
-            "placeholder": "Describe tu propiedad: ubicación, ambiente, proximidad a servicios, transporte, etc."
+            "title": "Descripción"
         },
+
         "rules": {
-            "title": "Normas de la vivienda",
-            "placeholder": "Ejemplo: No se permite fumar, no mascotas, horarios de visita, etc. (una norma por línea)"
+            "title": "Normas"
         },
-        "contact": {
-            "title": "Información de contacto",
-            "fullName": "Nombre completo",
-            "fullNamePlaceholder": "Tu nombre",
-            "phone": "Teléfono",
-            "phonePlaceholder": "+34 600 000 000",
-            "email": "Email",
-            "emailPlaceholder": "tu@email.com"
+
+        "buttons": {
+            "cancel": "Cancelar",
+            "submit": "Publicar",
+            "update": "Guardar cambios",
+            "saving": "Guardando..."
         },
-        "beforePublishing": {
-            "title": "Antes de publicar",
-            "tip1": "Asegúrate de que toda la información es correcta y actualizada",
-            "tip2": "Las imágenes deben ser reales y representativas de la propiedad",
-            "tip3": "Responde rápidamente a las consultas para aumentar tus posibilidades"
-        },
-        "options": {
-            "housingType": {
-                "room": "Habitación",
-                "flat": "Piso",
-                "apartment": "Apartamento",
-                "house": "Casa"
-            },
-            "zone": {
-                "center": "Centro",
-                "north": "Norte",
-                "south": "Sur",
-                "east": "Este",
-                "west": "Oeste"
-            },
-            "amenities": {
-                "wifi": "WiFi",
-                "airConditioning": "Aire acondicionado",
-                "heating": "Calefacción",
-                "parking": "Parking",
-                "tv": "TV",
-                "furnished": "Amueblado"
-            }
+
+        "errors": {
+            "publishError": "Error al publicar la vivienda"
         }
     },
     "aboutUs": {
@@ -341,6 +327,63 @@
         "contact": {
             "responseTime": "Tiempo de respuesta",
             "tip": "Consejo: Siempre visita la propiedad antes de hacer cualquier pago."
+        }
+    },
+    "profile": {
+        "back": "Volver",
+        "title": "Mi perfil",
+        "subtitle": "Consulta y modifica tus datos personales",
+        "editTitle": "Editar perfil",
+        "editSubtitle": "Actualiza tu información personal",
+        "adminTitle": "Panel de Administración",
+        "adminSubtitle": "Gestiona usuarios y propiedades de la plataforma",
+        "adminLogout": "Cerrar sesión",
+        "adminStats": {
+            "totalUsers": "Total Usuarios",
+            "properties": "Propiedades",
+            "verified": "Verificados",
+            "active": "Activos"
+        },
+        "personalData": {
+            "title": "Datos personales"
+        },
+        "userList": {
+            "title": "Usuarios"
+        },
+        "fields": {
+            "name": "Nombre",
+            "lastName": "Apellidos",
+            "phone": "Teléfono",
+            "email": "Correo electrónico",
+            "role": "Rol",
+            "status": "Estado"
+        },
+        "messages": {
+            "saveSuccess": "Perfil actualizado correctamente",
+            "saveError": "No se ha podido actualizar el perfil"
+        },
+        "buttons": {
+            "cancel": "Cancelar",
+            "save": "Guardar cambios",
+            "saving": "Guardando..."
+        },
+        "states": {
+            "loading": "Cargando..."
+        },
+        "owner": {
+            "defaultSubtitle": "Arrendador de Connect Roomies",
+            "defaultCity": "Madrid",
+            "defaultDescription": "Gestiona tus propiedades publicadas, revisa tus anuncios y mantén actualizada tu información personal.",
+            "editProfile": "Editar perfil",
+            "quickActions": "Acciones rápidas",
+            "publishProperty": "Publicar nueva propiedad",
+            "settings": "Configuración",
+            "logout": "Cerrar sesión",
+            "myProperties": "Mis propiedades",
+            "newProperty": "Nueva",
+            "active": "Activa",
+            "edit": "Editar",
+            "delete": "Eliminar"
         }
     }
 }

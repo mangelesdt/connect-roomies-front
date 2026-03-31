@@ -204,6 +204,11 @@ textarea {
   color: #fff;
 }
 
+.back-link img {
+  width: 30px;
+  height: 30px;
+}
+
 @media (max-width: 900px) {
   .four-cols {
     grid-template-columns: repeat(2, 1fr);

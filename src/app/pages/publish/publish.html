@@ -1,97 +1,101 @@
 <div class="publish-page">
+
   <div class="top-bar">
-    <a class="back-link" (click)="goHome()">
-      ← {{ 'publish.back' | translate }}
+    <a class="back-link" (click)="goBack()">
+      <img src="assets/images/atras.png" alt="atras"> {{ 'publish.back' | translate }}
     </a>
   </div>
 
   <div class="page-header">
     <img src="assets/images/iconoPublicar.png" alt="Logo" class="header-icon">
-    <h1>{{ 'publish.title' | translate }}</h1>
+    <h1>
+      @if (isEditMode) {
+        {{ 'publish.editTitle' | translate }}
+      } @else {
+        {{ 'publish.title' | translate }}
+      }
+    </h1>
     <p>{{ 'publish.subtitle' | translate }}</p>
   </div>
 
   <form [formGroup]="publishForm" (ngSubmit)="onSubmit()" class="publish-form">
+
+    <!-- INFO BÁSICA -->
     <section class="card">
       <h2>{{ 'publish.basicInfo.title' | translate }}</h2>
 
       <div class="field">
-        <label for="title">{{ 'publish.basicInfo.adTitle' | translate }} *</label>
-        <input
-          id="title"
-          type="text"
-          formControlName="title"
-          [placeholder]="'publish.basicInfo.adTitlePlaceholder' | translate"
-        />
+        <label>{{ 'publish.basicInfo.adTitle' | translate }} *</label>
+        <input type="text" formControlName="title" />
+      </div>
+
+      <div class="field">
+        <label>{{ 'publish.basicInfo.housingType' | translate }} *</label>
+        <select formControlName="housingType">
+          <option value="">
+            {{ 'publish.basicInfo.selectType' | translate }}
+          </option>
+          @for (type of housingTypes; track type.value) {
+            <option [value]="type.value">
+              {{ type.label | translate }}
+            </option>
+          }
+        </select>
+      </div>
+
+      <div class="field">
+        <label>{{ 'publish.basicInfo.address' | translate }} *</label>
+        <input type="text" formControlName="address" />
       </div>
 
       <div class="row two-cols">
         <div class="field">
-          <label for="housingType">{{ 'publish.basicInfo.housingType' | translate }} *</label>
-          <select id="housingType" formControlName="housingType">
-            <option value="">{{ 'publish.basicInfo.selectType' | translate }}</option>
-            @for (type of housingTypes; track type.value) {
-              <option [value]="type.value">{{ type.label | translate }}</option>
-            }
-          </select>
+          <label>{{ 'publish.basicInfo.city' | translate }} *</label>
+          <input type="text" formControlName="city" />
         </div>
 
         <div class="field">
-          <label for="zone">{{ 'publish.basicInfo.zone' | translate }} *</label>
-          <select id="zone" formControlName="zone">
-            <option value="">{{ 'publish.basicInfo.selectZone' | translate }}</option>
-            @for (zone of zones; track zone.value) {
-              <option [value]="zone.value">{{ zone.label | translate }}</option>
-            }
-          </select>
+          <label>{{ 'publish.basicInfo.province' | translate }} *</label>
+          <input type="text" formControlName="province" />
         </div>
       </div>
 
       <div class="field">
-        <label for="address">{{ 'publish.basicInfo.fullAddress' | translate }}</label>
-        <input
-          id="address"
-          type="text"
-          formControlName="address"
-          [placeholder]="'publish.basicInfo.fullAddressPlaceholder' | translate"
-        />
+        <label>{{ 'publish.basicInfo.postalCode' | translate }} *</label>
+        <input type="text" formControlName="postalCode" />
       </div>
     </section>
 
+    <!-- FEATURES -->
     <section class="card">
       <h2>{{ 'publish.features.title' | translate }}</h2>
 
       <div class="row four-cols">
         <div class="field">
-          <label for="rooms">{{ 'publish.features.rooms' | translate }} *</label>
-          <input id="rooms" type="number" formControlName="rooms" min="1" />
+          <label>{{ 'publish.features.rooms' | translate }}</label>
+          <input type="number" formControlName="rooms" />
         </div>
 
         <div class="field">
-          <label for="bathrooms">{{ 'publish.features.bathrooms' | translate }} *</label>
-          <input id="bathrooms" type="number" formControlName="bathrooms" min="1" />
+          <label>{{ 'publish.features.bathrooms' | translate }}</label>
+          <input type="number" formControlName="bathrooms" />
         </div>
 
         <div class="field">
-          <label for="size">{{ 'publish.features.size' | translate }} *</label>
-          <input id="size" type="number" formControlName="size" min="1" />
+          <label>{{ 'publish.features.size' | translate }}</label>
+          <input type="number" formControlName="size" />
         </div>
 
         <div class="field">
-          <label for="price">{{ 'publish.features.price' | translate }} *</label>
-          <input id="price" type="number" formControlName="price" min="1" />
+          <label>{{ 'publish.features.price' | translate }}</label>
+          <input type="number" formControlName="price" />
         </div>
-      </div>
-
-      <div class="field">
-        <label for="availableFrom">{{ 'publish.features.availableFrom' | translate }}</label>
-        <input id="availableFrom" type="date" formControlName="availableFrom" />
       </div>
     </section>
 
+    <!-- AMENITIES -->
     <section class="card">
       <h2>{{ 'publish.amenities.title' | translate }}</h2>
-      <p class="section-text">{{ 'publish.amenities.subtitle' | translate }}</p>
 
       <div class="amenities-grid" formGroupName="amenities">
         @for (amenity of amenities; track amenity.key) {
@@ -107,28 +111,25 @@
       </div>
     </section>
 
+    <!-- IMÁGENES -->
     <section class="card">
       <h2>{{ 'publish.images.title' | translate }}</h2>
-      <p class="section-text">{{ 'publish.images.subtitle' | translate }}</p>
 
       <label for="images" class="upload-box">
-        <span>{{ 'publish.images.clickUpload' | translate }}</span>
-        <small>{{ 'publish.images.dragDrop' | translate }}</small>
-        <small>{{ 'publish.images.formats' | translate }}</small>
+        {{ 'publish.images.upload' | translate }}
       </label>
 
       <input
         id="images"
         type="file"
         multiple
-        accept=".jpg,.jpeg,.png,.webp"
         (change)="onFilesSelected($event)"
         hidden
       />
 
       @if (selectedFiles.length > 0) {
         <div class="file-list">
-          <strong>{{ 'publish.images.selectedFiles' | translate }}</strong>
+          <strong>{{ 'publish.images.selected' | translate }}</strong>
           <ul>
             @for (file of selectedFiles; track file.name) {
               <li>{{ file.name }}</li>
@@ -138,77 +139,41 @@
       }
     </section>
 
+    <!-- DESCRIPCIÓN -->
     <section class="card">
       <h2>{{ 'publish.description.title' | translate }}</h2>
-      <textarea
-        rows="6"
-        formControlName="description"
-        [placeholder]="'publish.description.placeholder' | translate"
-      ></textarea>
+      <textarea rows="6" formControlName="description"></textarea>
     </section>
 
+    <!-- NORMAS -->
     <section class="card">
       <h2>{{ 'publish.rules.title' | translate }}</h2>
-      <textarea
-        rows="5"
-        formControlName="rules"
-        [placeholder]="'publish.rules.placeholder' | translate"
-      ></textarea>
+      <textarea rows="5" formControlName="rules"></textarea>
     </section>
 
-    <section class="card">
-      <h2>{{ 'publish.contact.title' | translate }}</h2>
+    <!-- ERROR -->
+    @if (errorMessage) {
+      <p class="error-message">
+        {{ 'publish.errors.publishError' | translate }}
+      </p>
+    }
 
-      <div class="field">
-        <label for="contactName">{{ 'publish.contact.fullName' | translate }} *</label>
-        <input
-          id="contactName"
-          type="text"
-          formControlName="contactName"
-          [placeholder]="'publish.contact.fullNamePlaceholder' | translate"
-        />
-      </div>
-
-      <div class="row two-cols">
-        <div class="field">
-          <label for="phone">{{ 'publish.contact.phone' | translate }} *</label>
-          <input
-            id="phone"
-            type="tel"
-            formControlName="phone"
-            [placeholder]="'publish.contact.phonePlaceholder' | translate"
-          />
-        </div>
-
-        <div class="field">
-          <label for="email">{{ 'publish.contact.email' | translate }} *</label>
-          <input
-            id="email"
-            type="email"
-            formControlName="email"
-            [placeholder]="'publish.contact.emailPlaceholder' | translate"
-          />
-        </div>
-      </div>
-    </section>
-
-    <section class="info-box">
-      <h3>{{ 'publish.beforePublishing.title' | translate }}</h3>
-      <ul>
-        <li>{{ 'publish.beforePublishing.tip1' | translate }}</li>
-        <li>{{ 'publish.beforePublishing.tip2' | translate }}</li>
-        <li>{{ 'publish.beforePublishing.tip3' | translate }}</li>
-      </ul>
-    </section>
-
+    <!-- BOTONES -->
     <div class="actions">
-      <button type="button" class="btn btn-secondary" (click)="goHome()">
-        {{ 'publish.cancel' | translate }}
+      <button type="button" class="btn btn-secondary" (click)="goBack()">
+        {{ 'publish.buttons.cancel' | translate }}
       </button>
 
-      <button type="submit" class="btn btn-primary">
-        {{ 'publish.submit' | translate }}
+      <button type="submit" class="btn btn-primary" [disabled]="loading">
+        @if (!loading && !isEditMode) {
+          {{ 'publish.buttons.submit' | translate }}
+        } @else if (!loading && isEditMode) {
+          {{ 'publish.buttons.update' | translate }}
+        } @else {
+          {{ 'publish.buttons.saving' | translate }}
+        }
       </button>
     </div>
+
   </form>
 </div>

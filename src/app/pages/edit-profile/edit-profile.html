@@ -1,0 +1,62 @@
+<div class="edit-profile-page">
+    <div class="top-bar">
+        <a class="back-link" (click)="goBack()">
+          <img src="assets/images/atras.png" alt="atras"> {{ 'publish.back' | translate }}
+        </a>
+      </div>
+
+  <div class="page-header">
+    <h1>{{ 'profile.editTitle' | translate }}</h1>
+    <p>{{ 'profile.editSubtitle' | translate }}</p>
+  </div>
+
+  @if (loading) {
+    <div class="state-box">
+      <p>{{ 'profile.states.loading' | translate }}</p>
+    </div>
+  }
+
+  @if (!loading) {
+    <form [formGroup]="profileForm" (ngSubmit)="guardar()" class="profile-form">
+      <section class="card">
+        <div class="field">
+          <label>{{ 'profile.fields.name' | translate }}</label>
+          <input type="text" formControlName="nombre" />
+        </div>
+
+        <div class="field">
+          <label>{{ 'profile.fields.lastName' | translate }}</label>
+          <input type="text" formControlName="apellidos" />
+        </div>
+
+        <div class="field">
+          <label>{{ 'profile.fields.phone' | translate }}</label>
+          <input type="tel" formControlName="telefono" />
+        </div>
+
+        <div class="field">
+          <label>{{ 'profile.fields.email' | translate }}</label>
+          <input type="email" formControlName="email" />
+        </div>
+      </section>
+
+      @if (errorMessage) {
+        <p class="error-message">{{ errorMessage }}</p>
+      }
+
+      <div class="actions">
+        <button type="button" class="btn btn-secondary" (click)="goBack()">
+          {{ 'profile.buttons.cancel' | translate }}
+        </button>
+
+        <button type="submit" class="btn btn-primary" [disabled]="saving">
+          @if (!saving) {
+            {{ 'profile.buttons.save' | translate }}
+          } @else {
+            {{ 'profile.buttons.saving' | translate }}
+          }
+        </button>
+      </div>
+    </form>
+  }
+</div>

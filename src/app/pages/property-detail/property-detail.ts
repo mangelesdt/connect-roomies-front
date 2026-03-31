@@ -1,105 +1,115 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-
-type Amenity = {
-  icon: string;
-  label: string;
-};
-
-type Expense = {
-  label: string;
-  amount: string;
-};
+import { ViviendaService } from '../../core/services/vivienda.service';
+import { Comodidad, Vivienda } from '../../core/interfaces/vivienda.interface';
 
 @Component({
   selector: 'app-property-detail',
   standalone: true,
   imports: [CommonModule, TranslateModule],
   templateUrl: './property-detail.html',
-  styleUrl: './property-detail.css'
+  styleUrls: ['./property-detail.css']
 })
-export class PropertyDetailComponent {
-  propertyId: string | null = null;
-  currentImageIndex = 0;
+export class PropertyDetailComponent implements OnInit {
+  vivienda: Vivienda | null = null;
+  viviendaId!: number;
 
-  property = {
-    id: 1,
-    typeLabel: 'propertyDetail.labels.room',
-    statusLabel: 'propertyDetail.labels.available',
-    title: 'propertyDetail.mock.title',
-    location: 'propertyDetail.mock.location',
-    price: '450€',
-    period: '/mes',
-    bedrooms: '1',
-    bathrooms: '1',
-    size: '25',
-    availableDate: '1 de Septiembre 2024',
-    description: 'propertyDetail.mock.description',
-    ownerName: 'María González',
-    responseTime: '1-2 horas',
-    phone: '+34 600 123 456',
-    email: 'maria.gonzalez@email.com',
-    images: [
-      'assets/images/house1.jpg',
-      'assets/images/house2.jpg',
-      'assets/images/house3.jpg',
-      'assets/images/house4.jpg'
-    ] as string[],
-    amenities: [
-      { icon: 'wifi', label: 'propertyDetail.amenities.wifi' },
-      { icon: 'ac_unit', label: 'propertyDetail.amenities.airConditioning' },
-      { icon: 'tv', label: 'propertyDetail.amenities.tv' },
-      { icon: 'chair', label: 'propertyDetail.amenities.furnished' },
-      { icon: 'local_parking', label: 'propertyDetail.amenities.parking' },
-      { icon: 'mode_fan', label: 'propertyDetail.amenities.heating' }
-    ] as Amenity[],
-    expenses: [
-      { label: 'propertyDetail.expenses.rent', amount: '450€' },
-      { label: 'propertyDetail.expenses.services', amount: '50€' },
-      { label: 'propertyDetail.expenses.internet', amount: '15€' },
-      { label: 'propertyDetail.expenses.cleaning', amount: '20€' }
-    ] as Expense[],
-    totalMonthly: '535€',
-    rules: [
-      'propertyDetail.rules.rule1',
-      'propertyDetail.rules.rule2',
-      'propertyDetail.rules.rule3',
-      'propertyDetail.rules.rule4'
-    ]
+  loading = false;
+  errorMessage = '';
+  imagenSeleccionada = 0;
+
+  amenityLabels: Record<Comodidad, string> = {
+    WIFI: 'WiFi de alta velocidad',
+    AIR: 'Aire acondicionado',
+    CALEFACCION: 'Calefacción',
+    PARKING: 'Parking disponible',
+    TV: 'TV en habitación',
+    AMUEBLADO: 'Completamente amueblada'
+  };
+
+  amenityIcons: Record<Comodidad, string> = {
+    WIFI: '📶',
+    AIR: '❄️',
+    CALEFACCION: '♨️',
+    PARKING: '🅿️',
+    TV: '📺',
+    AMUEBLADO: '🛏'
   };
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router
-  ) {
-    this.propertyId = this.route.snapshot.paramMap.get('id');
+    private router: Router,
+    private viviendaService: ViviendaService
+  ) {}
+
+  ngOnInit(): void {
+    const idParam = this.route.snapshot.paramMap.get('id');
+
+    if (!idParam || isNaN(Number(idParam))) {
+      this.errorMessage = 'Identificador de vivienda no válido';
+      return;
+    }
+
+    this.viviendaId = Number(idParam);
+    this.cargarVivienda();
+  }
+
+  cargarVivienda(): void {
+    this.loading = true;
+    this.errorMessage = '';
+
+    this.viviendaService.getViviendaById(this.viviendaId).subscribe({
+      next: (data) => {
+        this.vivienda = data;
+        this.loading = false;
+      },
+      error: () => {
+        this.errorMessage = 'No se ha podido cargar el detalle de la vivienda';
+        this.loading = false;
+      }
+    });
+  }
+
+  seleccionarImagen(index: number): void {
+    this.imagenSeleccionada = index;
+  }
+
+  get imagenPrincipal(): string {
+    if (
+      this.vivienda?.imagenesVivienda &&
+      this.vivienda.imagenesVivienda.length > 0
+    ) {
+      return this.vivienda.imagenesVivienda[this.imagenSeleccionada]?.urlImg
+        || this.vivienda.imagenesVivienda[0].urlImg;
+    }
+
+    return 'assets/images/house-placeholder.jpg';
+  }
+
+  contactar(): void {
+    if (!this.vivienda) return;
+
+    const email = this.vivienda.propietario?.email;
+    if (email) {
+      window.location.href = `mailto:${email}?subject=Interés en ${this.vivienda.titulo}`;
+    }
+  }
+
+  get comodidadesMostrables(): Comodidad[] {
+    return this.vivienda?.comodidades ?? [];
+  }
+
+  getAmenityLabel(key: Comodidad): string {
+    return this.amenityLabels[key];
+  }
+
+  getAmenityIcon(key: Comodidad): string {
+    return this.amenityIcons[key];
   }
 
   goBack(): void {
     this.router.navigate(['/home']);
-  }
-
-  setImage(index: number): void {
-    this.currentImageIndex = index;
-  }
-
-  prevImage(): void {
-    if (this.currentImageIndex === 0) {
-      this.currentImageIndex = this.property.images.length - 1;
-      return;
-    }
-
-    this.currentImageIndex--;
-  }
-
-  nextImage(): void {
-    if (this.currentImageIndex === this.property.images.length - 1) {
-      this.currentImageIndex = 0;
-      return;
-    }
-
-    this.currentImageIndex++;
   }
 }

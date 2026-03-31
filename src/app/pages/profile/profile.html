@@ -1,0 +1,166 @@
+<div class="profile-page">
+  @if (loading) {
+    <div class="state-box">
+      <p>{{ 'profile.states.loading' | translate }}</p>
+    </div>
+  }
+
+  @if (!loading && isUsuarioView && user) {
+    <div class="simple-profile-layout">
+      <section class="card">
+        <h1>{{ 'profile.title' | translate }}</h1>
+        <p>{{ 'profile.subtitle' | translate }}</p>
+
+        <form [formGroup]="profileForm" (ngSubmit)="guardar()" class="profile-form">
+          <div class="field">
+            <label>{{ 'profile.fields.name' | translate }}</label>
+            <input type="text" formControlName="nombre" />
+          </div>
+
+          <div class="field">
+            <label>{{ 'profile.fields.lastName' | translate }}</label>
+            <input type="text" formControlName="apellidos" />
+          </div>
+
+          <div class="field">
+            <label>{{ 'profile.fields.phone' | translate }}</label>
+            <input type="tel" formControlName="telefono" />
+          </div>
+
+          <div class="field">
+            <label>{{ 'profile.fields.email' | translate }}</label>
+            <input type="email" formControlName="email" />
+          </div>
+
+          @if (successMessage) {
+            <p class="success-message">{{ 'profile.messages.saveSuccess' | translate }}</p>
+          }
+
+          @if (errorMessage) {
+            <p class="error-message">{{ 'profile.messages.saveError' | translate }}</p>
+          }
+
+          <div class="actions">
+            <button type="submit" class="btn btn-primary" [disabled]="saving">
+              @if (!saving) {
+                {{ 'profile.buttons.save' | translate }}
+              } @else {
+                {{ 'profile.buttons.saving' | translate }}
+              }
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+  }
+
+  @if (!loading && isPropietarioView && user) {
+    <div class="owner-layout">
+      <div class="left-column">
+        <section class="card owner-profile-card">
+          <img src="assets/images/avatar.png" alt="Avatar" class="avatar" />
+
+          <h2>{{ user.nombre }} {{ user.apellidos }}</h2>
+          <p class="owner-subtitle">{{ 'profile.owner.defaultSubtitle' | translate }}</p>
+
+          <div class="owner-info">
+            <p><img src="assets/images/telefono.png" alt="Logo"> {{ user.telefono }}</p>
+            <p><img src="assets/images/correo.png" alt="Logo"> {{ user.email }}</p>
+          </div>
+
+          <div class="divider"></div>
+
+          <button type="button" class="btn btn-primary" (click)="irAEditarPerfil()">
+            {{ 'profile.owner.editProfile' | translate }}
+          </button>
+        </section>
+      </div>
+
+      <div class="right-column">
+        <section class="card properties-card">
+          <div class="section-header">
+            <h3>{{ 'profile.owner.myProperties' | translate }}</h3>
+            <button type="button" class="btn btn-primary" routerLink="/publicar">
+              + {{ 'profile.owner.newProperty' | translate }}
+            </button>
+          </div>
+
+          @for (vivienda of misViviendas; track vivienda.id) {
+            <div class="property-item">
+              <img
+                [src]="vivienda.imagenesVivienda?.length ? vivienda.imagenesVivienda[0].urlImg : 'assets/images/house-placeholder.jpg'"
+                alt="Vivienda"
+              />
+
+              <div class="property-info">
+                <h4>{{ vivienda.titulo }}</h4>
+                <p>{{ vivienda.tipo }}</p>
+                <span>{{ vivienda.precio }}€/mes</span>
+              </div>
+
+              <div class="property-actions">
+                <button type="button" class="btn btn-outline" (click)="editarVivienda(vivienda.id)">
+                  {{ 'profile.owner.edit' | translate }}
+                </button>
+
+                <button type="button" class="btn btn-danger" (click)="eliminarVivienda(vivienda.id)">
+                  {{ 'profile.owner.delete' | translate }}
+                </button>
+              </div>
+            </div>
+          }
+        </section>
+      </div>
+    </div>
+  }
+
+  @if (!loading && isAdminView) {
+    <div class="admin-layout">
+      <div class="admin-header">
+        <div>
+          <h1>{{ 'profile.adminTitle' | translate }}</h1>
+          <p>{{ 'profile.adminSubtitle' | translate }}</p>
+        </div>
+
+        <div class="top-bar">
+          <a class="back-link" (click)="goBack()">
+            <img src="assets/images/atras.png" alt="atras"> {{ 'publish.back' | translate }}
+          </a>
+        </div>
+      </div>
+
+      <section class="card">
+        <h2>{{ 'profile.userList.title' | translate }}</h2>
+
+        <div class="users-table-wrapper">
+          <table class="users-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>{{ 'profile.fields.name' | translate }}</th>
+                <th>{{ 'profile.fields.lastName' | translate }}</th>
+                <th>{{ 'profile.fields.phone' | translate }}</th>
+                <th>{{ 'profile.fields.email' | translate }}</th>
+                <th>{{ 'profile.fields.role' | translate }}</th>
+                <th>{{ 'profile.fields.status' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (user of users; track user.id) {
+                <tr>
+                  <td>{{ user.id }}</td>
+                  <td>{{ user.nombre }}</td>
+                  <td>{{ user.apellidos }}</td>
+                  <td>{{ user.telefono }}</td>
+                  <td>{{ user.email }}</td>
+                  <td>{{ getUserRole(user) }}</td>
+                  <td>{{ user.estado || '-' }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  }
+</div>

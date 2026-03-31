@@ -1,7 +1,16 @@
+export type Comodidad =
+  | 'WIFI'
+  | 'AIR'
+  | 'CALEFACCION'
+  | 'PARKING'
+  | 'TV'
+  | 'AMUEBLADO';
+
 export interface Propietario {
   id: number;
   nombre: string;
   email: string;
+  telefono: string;
 }
 
 export interface Vivienda {
@@ -14,12 +23,14 @@ export interface Vivienda {
   precio: number;
   disponible: number;
   fechaCreacion: string;
+  descripcion?: string;
+  metros?: number;
+  banos?: number;
+  habitacionesTotales?: number;
+  normas?: string;
+  comodidades?: Comodidad[];
+  propietario?: Propietario;
   imagenesVivienda: ImagenVivienda[];
-  descripcion: string;
-  metros: number;
-  banos: number;
-  habitacionesTotales: number;
-  normas: string;
 }
 
 export interface ImagenVivienda {

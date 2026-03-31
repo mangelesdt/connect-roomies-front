@@ -1,8 +1,11 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { LoginRequest, LoginResponse, RegisterRequest, UserRole } from '../interfaces/auth.interface';
+import { isPlatformBrowser } from '@angular/common';
+import { UserProfile } from '../interfaces/user.interface';
+import { Vivienda } from '../interfaces/vivienda.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +13,15 @@ import { LoginRequest, LoginResponse, RegisterRequest, UserRole } from '../inter
 export class AuthService {
 
   private apiUrl = environment.apiUrl;
+  private platformId = inject(PLATFORM_ID);
 
   constructor(
     private http: HttpClient,
   ) {}
+
+  private get isBrowser(): boolean {
+    return isPlatformBrowser(this.platformId);
+  }
 
   login(data: LoginRequest): Observable<LoginResponse> {
     const basicAuth = btoa(`${data.email}:${data.password}`);
@@ -27,17 +35,23 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('user');
-    localStorage.removeItem('basicAuth');
+    if(this.isBrowser) {
+      localStorage.removeItem('user');
+      localStorage.removeItem('basicAuth');
+    }
   }
 
   getUser(): LoginResponse | null {
+    if(!this.isBrowser) {
+      return null;
+    }
+
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
   }
 
   isLogged(): boolean {
-    return !!localStorage.getItem('user');
+    return !!this.getUser();
   }
 
   getRole(): UserRole | null {
@@ -64,4 +78,36 @@ export class AuthService {
   register(data: RegisterRequest) {
     return this.http.post(`${environment.apiUrl}/api/usuarios`, data, { responseType: 'text' });
   }
+
+  restoreSession(): void {
+    if (typeof window === 'undefined') return;
+
+    const user = localStorage.getItem('user');
+    const basicAuth = localStorage.getItem('basicAuth');
+
+    if (user && basicAuth) {
+      return;
+    }
+
+    localStorage.removeItem('user');
+    localStorage.removeItem('basicAuth');
+  }
+
+  getProfile(id: number): Observable<UserProfile> {
+      return this.http.get<UserProfile>(`${this.apiUrl}/api/usuarios/${id}`);
+  }
+
+  updateProfile(id: number, data: Partial<UserProfile>) {
+    return this.http.put<UserProfile>(`${this.apiUrl}/api/usuarios/${id}`, data).pipe(
+      tap((updatedUser) => {
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+      })
+    );
+  }
+
+  getAllUsers(): Observable<UserProfile[]> {
+    return this.http.get<UserProfile[]>(`${this.apiUrl}/api/usuarios`);
+  }
+
+  
 }
