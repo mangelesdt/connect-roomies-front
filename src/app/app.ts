@@ -20,7 +20,7 @@ export class App implements OnInit {
 
   constructor(private router: Router, private authService: AuthService) {
     this.router.events.subscribe(() => {
-      const hiddenRoutes = ['/login', '/registro'];
+      const hiddenRoutes = ['/login', '/registro', '/recuperar-password'];
       this.showHeaderFooter = !hiddenRoutes.includes(this.router.url);
     });
   }

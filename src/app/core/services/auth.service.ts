@@ -2,7 +2,7 @@ import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { LoginRequest, LoginResponse, RegisterRequest, UserRole } from '../interfaces/auth.interface';
+import { ChangePasswordRequest, LoginRequest, LoginResponse, RegisterRequest, UserRole } from '../interfaces/auth.interface';
 import { isPlatformBrowser } from '@angular/common';
 import { UserProfile } from '../interfaces/user.interface';
 import { Vivienda } from '../interfaces/vivienda.interface';
@@ -109,5 +109,9 @@ export class AuthService {
     return this.http.get<UserProfile[]>(`${this.apiUrl}/api/usuarios`);
   }
 
-  
+  changePassword(data: ChangePasswordRequest) {
+    return this.http.put(`${this.apiUrl}/api/usuarios/restablecer-password`, data, {
+      responseType: 'text'
+    });
+  }
 }

@@ -10,12 +10,14 @@ import { publishGuard } from './core/guards/rol-guard';
 import { loginGuard } from './core/guards/login-guard';
 import { ProfileComponent } from './pages/profile/profile';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile';
+import { RecoverPasswordComponent } from './auth/recover-password/recover-password';
 
 export const routes: Routes = [
   
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate: [loginGuard] },
   { path: 'registro', component: RegisterComponent, canActivate: [loginGuard] },
+  { path: 'recuperar-password', component: RecoverPasswordComponent, canActivate: [loginGuard] },
   { path: 'home', component: HomeComponent, canActivate: [authGuard] },
   { path: 'publicar', component: PublishComponent, canActivate: [publishGuard] },
   { path: 'publicar/:id', component: PublishComponent, canActivate: [publishGuard] },

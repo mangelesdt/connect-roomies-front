@@ -20,3 +20,9 @@ export interface RegisterRequest {
   password: string;
   rol?: UserRole;
 }
+
+export interface ChangePasswordRequest {
+  email: string;
+  oldPassword: string;
+  newPassword: string;
+}

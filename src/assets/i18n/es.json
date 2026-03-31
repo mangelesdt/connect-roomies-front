@@ -12,7 +12,7 @@
         "password": "Contraseña",
         "passwordPlaceholder": "Introduce tu contraseña",
         "passwordError": "La contraseña es obligatoria",
-        "olvidaste": "¿Olvidaste tu contraseña?",
+        "olvidaste": "¿Quieres cambiar tu contraseña?",
         "boton": "Entrar",
         "cargando": "Entrando...",
         "noCuenta": "¿No tienes cuenta?",
@@ -385,5 +385,37 @@
             "edit": "Editar",
             "delete": "Eliminar"
         }
+    },
+    "recoverPassword": {
+      "title": "Restablecer contraseña",
+      "fields": {
+        "email": "Email",
+        "oldPassword": "Contraseña actual",
+        "newPassword": "Nueva contraseña",
+        "repeatNewPassword": "Repite la nueva contraseña"
+      },
+      "placeholders": {
+        "email": "Introduce tu email",
+        "oldPassword": "Introduce tu contraseña actual",
+        "newPassword": "Introduce tu nueva contraseña",
+        "repeatNewPassword": "Repite tu nueva contraseña"
+      },
+      "errors": {
+        "invalidEmail": "Introduce un email válido",
+        "oldPasswordRequired": "La contraseña antigua es obligatoria",
+        "newPasswordRequired": "La nueva contraseña es obligatoria",
+        "newPasswordMinLength": "La nueva contraseña debe tener al menos 6 caracteres",
+        "repeatNewPasswordRequired": "Debes repetir la nueva contraseña",
+        "passwordsMismatch": "Las nuevas contraseñas no coinciden"
+      },
+      "actions": {
+        "submit": "Actualizar contraseña",
+        "loading": "Guardando...",
+        "backToLogin": "Volver al login"
+      },
+      "messages": {
+        "success": "Contraseña actualizada correctamente",
+        "genericError": "No se pudo actualizar la contraseña"
+      }
     }
 }
