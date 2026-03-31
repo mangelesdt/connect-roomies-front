@@ -10,9 +10,6 @@
     <div class="navbar-center">
         <ul class="nav-links">
             <li><a routerLink="/home">{{ 'navbar.links.inicio' | translate }}</a></li>
-            @if (authService.isAdmin()) {
-              <li><a routerLink="/buscar">{{ 'navbar.links.buscar' | translate }}</a></li>
-            }
             @if (authService.canPublish()) {
               <li><a routerLink="/publicar">{{ 'navbar.links.publicar' | translate }}</a></li>
             }

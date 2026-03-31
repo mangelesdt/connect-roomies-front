@@ -14,9 +14,6 @@
       <ul>
         <ul class="nav-links">
             <li><a routerLink="/home">{{ 'footer.home' | translate }}</a></li>
-            @if (authService.isAdmin()) {
-              <li><a routerLink="/buscar">{{ 'footer.findHousing' | translate }}</a></li>
-            }
             @if (authService.canPublish()) {
               <li><a routerLink="/publicar">{{ 'footer.postAd' | translate }}</a></li>
             }
