@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../core/services/auth.service';
 import { UserProfile } from '../../core/interfaces/user.interface';
 
@@ -25,7 +25,8 @@ export class EditProfileComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {
     this.profileForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.maxLength(100)]],
@@ -83,6 +84,8 @@ export class EditProfileComponent implements OnInit {
     this.authService.updateProfile(this.userId, this.profileForm.value).subscribe({
       next: () => {
         this.saving = false;
+        this.loading = false;
+        this.successMessage = this.translate.instant('profile.messages.saveSuccess');
         this.router.navigate(['/perfil']);
       },
       error: () => {

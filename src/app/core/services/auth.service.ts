@@ -99,8 +99,13 @@ export class AuthService {
 
   updateProfile(id: number, data: Partial<UserProfile>) {
     return this.http.put<UserProfile>(`${this.apiUrl}/api/usuarios/${id}`, data).pipe(
-      tap((updatedUser) => {
-        localStorage.setItem('user', JSON.stringify(updatedUser));
+      tap(() => {
+        const currentUser = this.getUser();
+
+        if (currentUser) {
+          const updatedUser = { ...currentUser, ...data };
+          localStorage.setItem('user', JSON.stringify(updatedUser));
+        }
       })
     );
   }

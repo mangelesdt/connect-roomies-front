@@ -118,6 +118,11 @@ input:focus {
   font-weight: 600;
 }
 
+.success-message {
+  color: #16a34a;
+  font-weight: 600;
+}
+
 .state-box {
   background: white;
   border-radius: 18px;

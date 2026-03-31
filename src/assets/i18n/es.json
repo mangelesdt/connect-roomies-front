@@ -85,7 +85,6 @@
     "navbar": {
         "links": {
         "inicio": "Inicio",
-        "buscar": "Buscar",
         "publicar": "Publicar",
         "perfil": "Perfil",
         "sobre_nosotros": "Sobre nosotros"

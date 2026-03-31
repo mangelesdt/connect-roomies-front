@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../core/services/auth.service';
 import { ViviendaService } from '../../core/services/vivienda.service';
 import { UserProfile } from '../../core/interfaces/user.interface';
@@ -37,7 +37,8 @@ export class ProfileComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private viviendaService: ViviendaService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {
     this.profileForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.maxLength(100)]],
@@ -137,6 +138,7 @@ export class ProfileComponent implements OnInit {
       next: (updatedUser) => {
         this.user = updatedUser;
         this.saving = false;
+        this.successMessage = this.translate.instant('profile.messages.saveSuccess');
         this.cargarPerfil();
       },
       error: () => {

@@ -7,6 +7,13 @@
 
   @if (!loading && isUsuarioView && user) {
     <div class="simple-profile-layout">
+
+      <div class="top-bar">
+        <a class="back-link" (click)="goBack()">
+          <img src="assets/images/atras.png" alt="atras"> {{ 'publish.back' | translate }}
+        </a>
+      </div>
+
       <section class="card">
         <h1>{{ 'profile.title' | translate }}</h1>
         <p>{{ 'profile.subtitle' | translate }}</p>

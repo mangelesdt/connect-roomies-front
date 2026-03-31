@@ -40,6 +40,10 @@
         </div>
       </section>
 
+      @if (successMessage) {
+        <p class="success-message">{{ successMessage }}</p>
+      }
+
       @if (errorMessage) {
         <p class="error-message">{{ errorMessage }}</p>
       }
