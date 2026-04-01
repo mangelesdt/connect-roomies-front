@@ -157,7 +157,6 @@
                         <h4>
                           {{
                             solicitud.vivienda?.titulo ||
-                            solicitud.habitacion?.nombre ||
                             ('profile.requests.defaultTitle' | translate)
                           }}
                         </h4>
@@ -316,7 +315,7 @@
                   <div class="request-top">
                     <div>
                       <h4>
-                        {{ solicitud.vivienda?.titulo || solicitud.habitacion?.nombre || ('admin.requests.defaultTitle' | translate) }}
+                        {{ solicitud.vivienda?.titulo || ('admin.requests.defaultTitle' | translate) }}
                       </h4>
 
                       <p class="request-user">

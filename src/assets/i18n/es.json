@@ -3,6 +3,10 @@
         "connect": "Connect",
         "roomies": "Roomies"
     },
+    "common":{
+        "cancel": "Cancelar",
+        "back": "Volver"
+    },
     "login": {
         "titulo": "Inicia sesión en tu cuenta",
         "email": "Correo electrónico",
@@ -130,7 +134,7 @@
             "apartamento": "Apartamento",
             "piso": "Piso",
             "habitacion": "Habitación",
-            "loft": "Loft",
+            "casa": "Casa",
             "recientes": "Más recientes",
             "precioAsc": "Precio ascendente",
             "precioDesc": "Precio descendente"

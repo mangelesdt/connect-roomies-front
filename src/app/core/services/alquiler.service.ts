@@ -2,7 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { AlquilerOwnerItem, AlquilerResponse, RegistrarAlquilerRequest } from '../interfaces/alquiler.interface';
+import {
+  AlquilerOwnerItem,
+  AlquilerResponse,
+  RegistrarAlquilerRequest
+} from '../interfaces/alquiler.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +25,11 @@ export class AlquilerService {
     return this.http.get<AlquilerOwnerItem[]>(`${this.apiUrl}/api/alquileres/propietario`, { params });
   }
 
-  actualizarEstadoSolicitud(alquilerId: number, estado: 'ACEPTADO' | 'RECHAZADO'): Observable<any> {
-    return this.http.put(`${this.apiUrl}/api/alquileres/${alquilerId}/estado`, { estado });
+  getTodasSolicitudes(): Observable<AlquilerOwnerItem[]> {
+    return this.http.get<AlquilerOwnerItem[]>(`${this.apiUrl}/api/alquileres`);
   }
 
-  getTodasSolicitudes() {
-    return this.http.get<AlquilerOwnerItem[]>(`${this.apiUrl}/api/alquileres`);
-}
+  actualizarEstadoSolicitud(alquilerId: number, estado: string): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/api/alquileres/${alquilerId}/estado`, { estado });
+  }
 }

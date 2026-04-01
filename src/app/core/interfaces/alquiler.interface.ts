@@ -2,7 +2,6 @@ export interface RegistrarAlquilerRequest {
   fechaInicio: string;
   fechaFin: string;
   viviendaId?: number;
-  habitacionId?: number;
   mensaje?: string;
   duracionMeses?: number;
 }
@@ -30,10 +29,6 @@ export interface AlquilerOwnerItem {
   vivienda?: {
     id: number;
     titulo: string;
-  };
-  habitacion?: {
-    id: number;
-    nombre: string;
   };
 }
 
