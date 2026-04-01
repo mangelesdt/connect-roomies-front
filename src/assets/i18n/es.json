@@ -309,11 +309,11 @@
             "total": "Total mensual"
         },
         "amenities": {
-            "wifi": "WiFi de alta velocidad",
+            "wifi": "WiFi",
             "airConditioning": "Aire acondicionado",
-            "tv": "TV en habitación",
-            "furnished": "Completamente amueblada",
-            "parking": "Parking disponible",
+            "tv": "TV",
+            "furnished": "Amueblado",
+            "parking": "Parking",
             "heating": "Calefacción"
         },
         "rules": {
@@ -326,6 +326,32 @@
         "contact": {
             "responseTime": "Tiempo de respuesta",
             "tip": "Consejo: Siempre visita la propiedad antes de hacer cualquier pago."
+        },
+        "loading": "Cargando vivienda...",
+        "available": "Disponible",
+        "perMonth": "/mes",
+        "room": "habitación",
+        "rooms": "habitaciones",
+        "bathroom": "baño",
+        "bathrooms": "baños",
+        "description": "Descripción",
+        "contactOwner": "Contactar con el arrendador",
+        "responseTime": "Tiempo de respuesta: 1-2 horas",
+        "advice": "Consejo: Siempre visita la propiedad antes de hacer cualquier pago.",
+        "rentRequest": {
+            "openButton": "Solicitar alquiler",
+            "title": "Solicitar alquiler",
+            "subtitle": "Envía una solicitud de alquiler a {{ownerName}}",
+            "messageLabel": "Mensaje al propietario *",
+            "messagePlaceholder": "Cuéntale al propietario sobre ti, por qué estás interesado en esta propiedad...",
+            "entryDateLabel": "Fecha de entrada deseada *",
+            "durationLabel": "Duración del alquiler (meses) *",
+            "month": "mes",
+            "months": "meses",
+            "importantTitle": "⚠ Importante:",
+            "importantText": "Esta solicitud será enviada al propietario. Asegúrate de incluir toda la información relevante sobre ti y tus necesidades.",
+            "sending": "Enviando...",
+            "submit": "Enviar solicitud"
         }
     },
     "profile": {
@@ -383,6 +409,39 @@
             "active": "Activa",
             "edit": "Editar",
             "delete": "Eliminar"
+        },
+        "requests": {
+            "title": "Solicitudes de alquiler",
+
+            "filters": {
+                "TODAS": "Todas",
+                "PENDIENTE": "Pendientes",
+                "ACEPTADO": "Aceptadas",
+                "RECHAZADO": "Rechazadas"
+            },
+
+            "empty": "No has recibido ninguna solicitud aún",
+            "defaultTitle": "Solicitud",
+
+            "tenant": "Inquilino",
+
+            "entry": "Entrada",
+            "end": "Fin",
+            "duration": "Duración",
+
+            "month": "mes",
+            "months": "meses",
+
+            "status": {
+                "PENDIENTE": "Pendiente",
+                "ACEPTADO": "Aceptada",
+                "RECHAZADO": "Rechazada"
+            },
+
+            "actions": {
+                "accept": "Aceptar",
+                "reject": "Rechazar"
+            }
         }
     },
     "recoverPassword": {
@@ -416,5 +475,24 @@
         "success": "Contraseña actualizada correctamente",
         "genericError": "No se pudo actualizar la contraseña"
       }
+    },
+    "admin": {
+        "requests": {
+            "title": "Todas las solicitudes",
+            "loading": "Cargando solicitudes...",
+            "empty": "No hay solicitudes registradas",
+            "defaultTitle": "Solicitud",
+            "tenant": "Inquilino",
+            "entry": "Entrada",
+            "end": "Fin",
+            "duration": "Duración",
+            "month": "mes",
+            "months": "meses",
+            "status": {
+                "PENDIENTE": "Pendiente",
+                "ACEPTADO": "Aceptada",
+                "RECHAZADO": "Rechazada"
+            }
+        }
     }
 }

@@ -7,6 +7,8 @@ import { AuthService } from '../../core/services/auth.service';
 import { ViviendaService } from '../../core/services/vivienda.service';
 import { UserProfile } from '../../core/interfaces/user.interface';
 import { Vivienda } from '../../core/interfaces/vivienda.interface';
+import { AlquilerService } from '../../core/services/alquiler.service';
+import { AlquilerOwnerItem, SolicitudFiltro } from '../../core/interfaces/alquiler.interface';
 
 @Component({
   selector: 'app-profile',
@@ -33,12 +35,32 @@ export class ProfileComponent implements OnInit {
 
   userId!: number;
 
+  solicitudesAlquiler: AlquilerOwnerItem[] = [];
+  solicitudesFiltradas: AlquilerOwnerItem[] = [];
+  solicitudesLoading = false;
+  solicitudesError = '';
+
+  solicitudesAdmin: AlquilerOwnerItem[] = [];
+  solicitudesAdminFiltradas: AlquilerOwnerItem[] = [];
+  solicitudesAdminLoading = false;
+  solicitudesAdminError = '';
+
+  filtroSolicitudes: SolicitudFiltro = 'TODAS';
+
+  readonly filtrosSolicitud: { key: SolicitudFiltro; label: string }[] = [
+    { key: 'TODAS', label: 'Todas' },
+    { key: 'PENDIENTE', label: 'Pendientes' },
+    { key: 'ACEPTADO', label: 'Aceptadas' },
+    { key: 'RECHAZADO', label: 'Rechazadas' }
+  ];
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private viviendaService: ViviendaService,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private alquilerService: AlquilerService
   ) {
     this.profileForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.maxLength(100)]],
@@ -66,9 +88,11 @@ export class ProfileComponent implements OnInit {
 
     if (this.isAdminView) {
       this.cargarUsuarios();
+      this.cargarSolicitudesAdmin();
     } else if (this.isPropietarioView) {
       this.cargarPerfil();
       this.cargarMisViviendas();
+      this.cargarSolicitudesAlquiler();
     } else {
       this.cargarPerfil();
     }
@@ -192,5 +216,121 @@ export class ProfileComponent implements OnInit {
 
   irAEditarPerfil(): void {
     this.router.navigate(['/perfil/editar']);
+  }
+
+  cargarSolicitudesAlquiler(): void {
+    if (!this.userId) return;
+
+    this.solicitudesLoading = true;
+    this.solicitudesError = '';
+
+    this.alquilerService.getSolicitudesPropietario(this.userId).subscribe({
+      next: (data) => {
+        this.solicitudesAlquiler = data ?? [];
+        this.aplicarFiltroSolicitudes();
+        this.solicitudesLoading = false;
+      },
+      error: () => {
+        this.solicitudesError = 'No se han podido cargar las solicitudes';
+        this.solicitudesLoading = false;
+      }
+    });
+  }
+
+  seleccionarFiltroSolicitudes(filtro: SolicitudFiltro): void {
+    this.filtroSolicitudes = filtro;
+    this.aplicarFiltroSolicitudes();
+  }
+
+  aplicarFiltroSolicitudes(): void {
+    if (this.filtroSolicitudes === 'TODAS') {
+      this.solicitudesFiltradas = [...this.solicitudesAlquiler];
+      return;
+    }
+
+    this.solicitudesFiltradas = this.solicitudesAlquiler.filter(
+      solicitud => solicitud.estado === this.filtroSolicitudes
+    );
+  }
+
+  contarSolicitudes(filtro: SolicitudFiltro): number {
+    if (filtro === 'TODAS') {
+      return this.solicitudesAlquiler.length;
+    }
+
+    return this.solicitudesAlquiler.filter(s => s.estado === filtro).length;
+  }
+
+  getSolicitudEstadoClass(estado: string): string {
+    switch (estado) {
+      case 'PENDIENTE':
+        return 'badge-pending';
+      case 'ACEPTADO':
+        return 'badge-accepted';
+      case 'RECHAZADO':
+        return 'badge-rejected';
+      default:
+        return 'badge-default';
+    }
+  }
+
+  getSolicitudEstadoLabel(estado: string): string {
+    switch (estado) {
+      case 'PENDIENTE':
+        return 'Pendiente';
+      case 'ACEPTADO':
+        return 'Aceptada';
+      case 'RECHAZADO':
+        return 'Rechazada';
+      default:
+        return estado;
+    }
+  }
+
+  aceptarSolicitud(id: number): void {
+    this.alquilerService.actualizarEstadoSolicitud(id, 'ACEPTADO').subscribe({
+      next: () => {
+        this.cargarSolicitudesAlquiler();
+      },
+      error: () => {
+        this.solicitudesError = 'No se pudo aceptar la solicitud';
+      }
+    });
+  }
+
+  rechazarSolicitud(id: number): void {
+    this.alquilerService.actualizarEstadoSolicitud(id, 'RECHAZADO').subscribe({
+      next: () => {
+        this.cargarSolicitudesAlquiler();
+      },
+      error: () => {
+        this.solicitudesError = 'No se pudo rechazar la solicitud';
+      }
+    });
+  }
+
+  trackSolicitud(index: number, item: AlquilerOwnerItem): number {
+    return item.id;
+  }
+
+  cargarSolicitudesAdmin(): void {
+    this.solicitudesAdminLoading = true;
+    this.solicitudesAdminError = '';
+
+    this.alquilerService.getTodasSolicitudes().subscribe({
+      next: (data) => {
+        this.solicitudesAdmin = data ?? [];
+        this.aplicarFiltroSolicitudes();
+        this.solicitudesAdminLoading = false;
+      },
+      error: () => {
+        this.solicitudesAdminError = 'No se han podido cargar las solicitudes';
+        this.solicitudesAdminLoading = false;
+      }
+    });
+  }
+
+  getSolicitudEstadoKey(estado: string): string {
+    return `admin.requests.status.${estado}`;
   }
 }

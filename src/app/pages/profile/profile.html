@@ -117,6 +117,111 @@
             </div>
           }
         </section>
+        <section class="card rental-requests-card">
+          <div class="requests-header">
+            <div class="requests-title">
+              <img src="assets/images/info.png" alt="Info" class="requests-title-icon">
+              <h3>{{ 'profile.requests.title' | translate }}</h3>
+            </div>
+
+            @if (solicitudesError) {
+              <p class="error-message">{{ solicitudesError }}</p>
+            }
+          </div>
+
+          <div class="request-filters">
+            @for (filtro of filtrosSolicitud; track filtro.key) {
+              <button
+                type="button"
+                class="filter-chip"
+                [class.active]="filtroSolicitudes === filtro.key"
+                (click)="seleccionarFiltroSolicitudes(filtro.key)">
+                {{ ('profile.requests.filters.' + filtro.key) | translate }}
+                ({{ contarSolicitudes(filtro.key) }})
+              </button>
+            }
+          </div>
+
+          @if (solicitudesFiltradas.length === 0) {
+            <div class="requests-empty">
+              <div class="requests-empty-icon">!</div>
+              <p>{{ 'profile.requests.empty' | translate }}</p>
+            </div>
+          } @else {
+            <div class="requests-list">
+              @for (solicitud of solicitudesFiltradas; track trackSolicitud($index, solicitud)) {
+                <article class="request-item">
+                  <div class="request-main">
+                    <div class="request-top">
+                      <div>
+                        <h4>
+                          {{
+                            solicitud.vivienda?.titulo ||
+                            solicitud.habitacion?.nombre ||
+                            ('profile.requests.defaultTitle' | translate)
+                          }}
+                        </h4>
+
+                        <p class="request-user">
+                          {{ 'profile.requests.tenant' | translate }}:
+                          {{ solicitud.inquilino?.nombre || '-' }}
+                        </p>
+                      </div>
+
+                      <span class="request-badge" [ngClass]="getSolicitudEstadoClass(solicitud.estado)">
+                        {{ ('profile.requests.status.' + solicitud.estado) | translate }}
+                      </span>
+                    </div>
+
+                    <div class="request-meta">
+                      <span>
+                        {{ 'profile.requests.entry' | translate }}:
+                        {{ solicitud.fechaInicio | date:'dd/MM/yyyy' }}
+                      </span>
+
+                      <span>
+                        {{ 'profile.requests.end' | translate }}:
+                        {{ solicitud.fechaFin | date:'dd/MM/yyyy' }}
+                      </span>
+
+                      <span>
+                        {{ 'profile.requests.duration' | translate }}:
+                        {{ solicitud.duracionMeses || '-' }}
+                        {{
+                          (solicitud.duracionMeses || 0) === 1
+                            ? ('profile.requests.month' | translate)
+                            : ('profile.requests.months' | translate)
+                        }}
+                      </span>
+                    </div>
+
+                    @if (solicitud.mensaje) {
+                      <p class="request-message">{{ solicitud.mensaje }}</p>
+                    }
+                  </div>
+
+                  @if (solicitud.estado === 'PENDIENTE') {
+                    <div class="request-actions">
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="aceptarSolicitud(solicitud.id)">
+                        {{ 'profile.requests.actions.accept' | translate }}
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn btn-outline"
+                        (click)="rechazarSolicitud(solicitud.id)">
+                        {{ 'profile.requests.actions.reject' | translate }}
+                      </button>
+                    </div>
+                  }
+                </article>
+              }
+            </div>
+          }
+        </section>
       </div>
     </div>
   }
@@ -167,6 +272,94 @@
             </tbody>
           </table>
         </div>
+      </section>
+    
+      <section class="card rental-requests-card">
+        <div class="requests-header">
+          <div class="requests-title">
+            <img src="assets/images/info.png" alt="Info" class="requests-title-icon">
+            <h3>{{ 'admin.requests.title' | translate }}</h3>
+          </div>
+
+          @if (solicitudesAdminError) {
+            <p class="error-message">{{ solicitudesAdminError | translate }}</p>
+          }
+        </div>
+
+        <div class="request-filters">
+          @for (filtro of filtrosSolicitud; track filtro.key) {
+            <button
+              type="button"
+              class="filter-chip"
+              [class.active]="filtroSolicitudes === filtro.key"
+              (click)="seleccionarFiltroSolicitudes(filtro.key)">
+              {{ filtro.label | translate }} ({{ contarSolicitudes(filtro.key) }})
+            </button>
+          }
+        </div>
+
+        @if (solicitudesAdminLoading) {
+          <div class="requests-empty">
+            <div class="requests-empty-icon">!</div>
+            <p>{{ 'admin.requests.loading' | translate }}</p>
+          </div>
+        } @else if (solicitudesAdminFiltradas.length === 0) {
+          <div class="requests-empty">
+            <div class="requests-empty-icon">!</div>
+            <p>{{ 'admin.requests.empty' | translate }}</p>
+          </div>
+        } @else {
+          <div class="requests-list">
+            @for (solicitud of solicitudesAdminFiltradas; track trackSolicitud($index, solicitud)) {
+              <article class="request-item">
+                <div class="request-main">
+                  <div class="request-top">
+                    <div>
+                      <h4>
+                        {{ solicitud.vivienda?.titulo || solicitud.habitacion?.nombre || ('admin.requests.defaultTitle' | translate) }}
+                      </h4>
+
+                      <p class="request-user">
+                        {{ 'admin.requests.tenant' | translate }}:
+                        {{ solicitud.inquilino?.nombre || '-' }}
+                      </p>
+                    </div>
+
+                    <span class="request-badge" [ngClass]="getSolicitudEstadoClass(solicitud.estado)">
+                      {{ getSolicitudEstadoKey(solicitud.estado) | translate }}
+                    </span>
+                  </div>
+
+                  <div class="request-meta">
+                    <span>
+                      {{ 'admin.requests.entry' | translate }}:
+                      {{ solicitud.fechaInicio | date:'dd/MM/yyyy' }}
+                    </span>
+
+                    <span>
+                      {{ 'admin.requests.end' | translate }}:
+                      {{ solicitud.fechaFin | date:'dd/MM/yyyy' }}
+                    </span>
+
+                    <span>
+                      {{ 'admin.requests.duration' | translate }}:
+                      {{ solicitud.duracionMeses || '-' }}
+                      {{
+                        (solicitud.duracionMeses || 0) === 1
+                          ? ('admin.requests.month' | translate)
+                          : ('admin.requests.months' | translate)
+                      }}
+                    </span>
+                  </div>
+
+                  @if (solicitud.mensaje) {
+                    <p class="request-message">{{ solicitud.mensaje }}</p>
+                  }
+                </div>
+              </article>
+            }
+          </div>
+        }
       </section>
     </div>
   }

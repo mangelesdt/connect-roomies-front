@@ -43,10 +43,10 @@ export class PublishComponent implements OnInit {
   viviendaId!: number;
 
   housingTypes = [
-    { value: 'HABITACION', label: 'publish.housingType.room' },
-    { value: 'PISO', label: 'publish.housingType.flat' },
-    { value: 'APARTAMENTO', label: 'publish.housingType.apartment' },
-    { value: 'CASA', label: 'publish.housingType.house' }
+    { value: 'Habitación', label: 'publish.housingType.room' },
+    { value: 'Piso', label: 'publish.housingType.flat' },
+    { value: 'Apartamento', label: 'publish.housingType.apartment' },
+    { value: 'Casa', label: 'publish.housingType.house' }
   ];
 
   amenities: { key: AmenityKey; label: string }[] = [
