@@ -40,6 +40,7 @@ export interface AlquilerUsuarioItem {
   fechaInicio: string;
   fechaFin: string;
   estado: EstadoSolicitud;
+  duracionMeses?: number;
   vivienda?: {
     id: number;
     titulo: string;

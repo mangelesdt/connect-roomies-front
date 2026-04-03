@@ -416,35 +416,29 @@
         },
         "requests": {
             "title": "Solicitudes de alquiler",
-
-            "filters": {
-                "TODAS": "Todas",
-                "PENDIENTE": "Pendientes",
-                "ACTIVO": "Activas",
-                "RECHAZADO": "Rechazadas"
-            },
-
+            "subtitle": "Consulta el estado de las solicitudes que has enviado.",
+            "loading": "Cargando solicitudes...",
             "empty": "No has recibido ninguna solicitud aún",
+            "emptyCreated": "No has creado ninguna solicitud todavía.",
             "defaultTitle": "Solicitud",
-
             "tenant": "Inquilino",
-
             "entry": "Entrada",
             "end": "Fin",
             "duration": "Duración",
-
             "month": "mes",
             "months": "meses",
-
             "status": {
                 "PENDIENTE": "Pendiente",
                 "ACTIVO": "Activa",
-                "RECHAZADO": "Rechazada"
+                "RECHAZADO": "Rechazada",
+                "ACEPTADO": "Aceptada",
+                "CANCELADO": "Cancelada",
+                "FINALIZADO": "Finalizada"
             },
-
             "actions": {
                 "accept": "Aceptar",
-                "reject": "Rechazar"
+                "reject": "Rechazar",
+                "cancel": "Cancelar solicitud"
             }
         }
     },

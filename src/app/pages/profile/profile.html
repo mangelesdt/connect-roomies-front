@@ -62,13 +62,13 @@
       <section class="card mt-4">
         <div class="section-header">
           <div>
-            <h3>Mis solicitudes</h3>
-            <p>Consulta el estado de las solicitudes que has enviado.</p>
+            <h3>{{ 'profile.requests.title' | translate }}</h3>
+            <p>{{ 'profile.requests.subtitle' | translate }}</p>
           </div>
         </div>
 
         @if (misSolicitudesLoading) {
-          <p>Cargando solicitudes...</p>
+          <p>{{ 'profile.requests.loading' | translate }}</p>
         }
 
         @if (misSolicitudesError) {
@@ -76,27 +76,45 @@
         }
 
         @if (!misSolicitudesLoading && misSolicitudes.length === 0) {
-          <p>No has creado ninguna solicitud todavía.</p>
+          <p>{{ 'profile.requests.emptyCreated' | translate }}</p>
         }
 
         @if (!misSolicitudesLoading && misSolicitudes.length > 0) {
           @for (solicitud of misSolicitudes; track solicitud.id) {
             <div class="request-item">
               <div class="request-main">
-                <div>
+                <div class="request-info">
                   <h4>
-                    {{ solicitud.vivienda?.titulo || solicitud.habitacion?.nombre || 'Solicitud' }}
+                    {{ solicitud.vivienda?.titulo || ('profile.requests.defaultTitle' | translate) + ' #' + solicitud.id }}
                   </h4>
-                  <p>
-                    <strong>Inicio:</strong> {{ solicitud.fechaInicio | date:'dd/MM/yyyy' }}
-                    &nbsp; | &nbsp;
-                    <strong>Fin:</strong> {{ solicitud.fechaFin | date:'dd/MM/yyyy' }}
-                  </p>
-                </div>
 
-                <span class="status-chip mt-3" [ngClass]="getSolicitudEstadoClass(solicitud.estado)">
-                  {{ getSolicitudEstadoLabel(solicitud.estado) }}
-                </span>
+                  <p>
+                    <strong>{{ 'profile.fields.status' | translate }}:</strong>
+                    <span class="status-chip mt-3" [ngClass]="getSolicitudEstadoClass(solicitud.estado)">
+                      {{ getSolicitudEstadoLabel(solicitud.estado) | translate }}
+                    </span>
+                  </p>
+
+                  <p>
+                    <strong>{{ 'profile.requests.entry' | translate }}:</strong>
+                    {{ solicitud.fechaInicio | date:'dd/MM/yyyy' }}
+                  </p>
+
+                  <p>
+                    <strong>{{ 'profile.requests.end' | translate }}:</strong>
+                    {{ solicitud.fechaFin | date:'dd/MM/yyyy' }}
+                  </p>
+
+                  @if (solicitud. duracionMeses) {
+                    <p>
+                      <strong>{{ 'profile.requests.duration' | translate }}:</strong>
+                      {{ solicitud.duracionMeses }}
+                      {{ solicitud.duracionMeses === 1
+                        ? ('profile.requests.month' | translate)
+                        : ('profile.requests.months' | translate) }}
+                    </p>
+                  }
+                </div>
               </div>
 
               @if (puedeCancelarSolicitud(solicitud.estado)) {
@@ -105,7 +123,7 @@
                     type="button"
                     class="btn btn-danger"
                     (click)="cancelarSolicitud(solicitud.id)">
-                    Cancelar solicitud
+                    {{ 'common.cancel' | translate }}
                   </button>
                 </div>
               }
