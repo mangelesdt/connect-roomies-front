@@ -199,10 +199,14 @@ export class PropertyDetailComponent implements OnInit {
         };
       },
       error: (error) => {
-        this.enviandoSolicitud = false;
-        this.solicitudError =
-          error?.error || 'No se pudo enviar la solicitud de alquiler.';
-      }
+      this.enviandoSolicitud = false;
+
+      this.solicitudError =
+        error?.error?.message ||
+        error?.error ||
+        error?.message ||
+        'No se pudo enviar la solicitud de alquiler.';
+    }
     });
   }
 

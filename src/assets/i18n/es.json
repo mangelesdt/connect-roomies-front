@@ -420,7 +420,7 @@
             "filters": {
                 "TODAS": "Todas",
                 "PENDIENTE": "Pendientes",
-                "ACEPTADO": "Aceptadas",
+                "ACTIVO": "Activas",
                 "RECHAZADO": "Rechazadas"
             },
 
@@ -438,7 +438,7 @@
 
             "status": {
                 "PENDIENTE": "Pendiente",
-                "ACEPTADO": "Aceptada",
+                "ACTIVO": "Activa",
                 "RECHAZADO": "Rechazada"
             },
 
@@ -475,7 +475,7 @@
         "loading": "Guardando...",
         "backToLogin": "Volver al login"
       },
-      "messages": {
+      "messages":   {
         "success": "Contraseña actualizada correctamente",
         "genericError": "No se pudo actualizar la contraseña"
       }
@@ -494,7 +494,7 @@
             "months": "meses",
             "status": {
                 "PENDIENTE": "Pendiente",
-                "ACEPTADO": "Aceptada",
+                "ACTIVO": "Activa",
                 "RECHAZADO": "Rechazada"
             }
         }

@@ -50,7 +50,7 @@ export class ProfileComponent implements OnInit {
   readonly filtrosSolicitud: { key: SolicitudFiltro; label: string }[] = [
     { key: 'TODAS', label: 'Todas' },
     { key: 'PENDIENTE', label: 'Pendientes' },
-    { key: 'ACEPTADO', label: 'Aceptadas' },
+    { key: 'ACTIVO', label: 'Activas' },
     { key: 'RECHAZADO', label: 'Rechazadas' }
   ];
 
@@ -265,7 +265,7 @@ export class ProfileComponent implements OnInit {
     switch (estado) {
       case 'PENDIENTE':
         return 'badge-pending';
-      case 'ACEPTADO':
+      case 'ACTIVO':
         return 'badge-accepted';
       case 'RECHAZADO':
         return 'badge-rejected';
@@ -278,8 +278,8 @@ export class ProfileComponent implements OnInit {
     switch (estado) {
       case 'PENDIENTE':
         return 'Pendiente';
-      case 'ACEPTADO':
-        return 'Aceptada';
+      case 'ACTIVO':
+        return 'Activa';
       case 'RECHAZADO':
         return 'Rechazada';
       default:
@@ -288,7 +288,7 @@ export class ProfileComponent implements OnInit {
   }
 
   aceptarSolicitud(id: number): void {
-    this.alquilerService.actualizarEstadoSolicitud(id, 'ACEPTADO').subscribe({
+    this.alquilerService.actualizarEstadoSolicitud(id, 'ACTIVO').subscribe({
       next: () => {
         this.cargarSolicitudesAlquiler();
       },
