@@ -19,7 +19,7 @@ export interface AlquilerOwnerItem {
   id: number;
   fechaInicio: string;
   fechaFin: string;
-  estado: 'PENDIENTE' | 'RECHAZADO' | 'ACTIVO' | 'FINALIZADO' | 'CANCELADO';
+  estado: EstadoSolicitud;
   mensaje?: string;
   duracionMeses?: number;
   inquilino?: {
@@ -32,4 +32,20 @@ export interface AlquilerOwnerItem {
   };
 }
 
+export type EstadoSolicitud = 'PENDIENTE' | 'RECHAZADO' | 'ACTIVO' | 'FINALIZADO' | 'CANCELADO';
 export type SolicitudFiltro = 'TODAS' | 'PENDIENTE' | 'ACTIVO' | 'RECHAZADO';
+
+export interface AlquilerUsuarioItem {
+  id: number;
+  fechaInicio: string;
+  fechaFin: string;
+  estado: EstadoSolicitud;
+  vivienda?: {
+    id: number;
+    titulo: string;
+  };
+  habitacion?: {
+    id: number;
+    nombre: string;
+  };
+}

@@ -58,6 +58,61 @@
           </div>
         </form>
       </section>
+    
+      <section class="card mt-4">
+        <div class="section-header">
+          <div>
+            <h3>Mis solicitudes</h3>
+            <p>Consulta el estado de las solicitudes que has enviado.</p>
+          </div>
+        </div>
+
+        @if (misSolicitudesLoading) {
+          <p>Cargando solicitudes...</p>
+        }
+
+        @if (misSolicitudesError) {
+          <p class="error-message">{{ misSolicitudesError }}</p>
+        }
+
+        @if (!misSolicitudesLoading && misSolicitudes.length === 0) {
+          <p>No has creado ninguna solicitud todavía.</p>
+        }
+
+        @if (!misSolicitudesLoading && misSolicitudes.length > 0) {
+          @for (solicitud of misSolicitudes; track solicitud.id) {
+            <div class="request-item">
+              <div class="request-main">
+                <div>
+                  <h4>
+                    {{ solicitud.vivienda?.titulo || solicitud.habitacion?.nombre || 'Solicitud' }}
+                  </h4>
+                  <p>
+                    <strong>Inicio:</strong> {{ solicitud.fechaInicio | date:'dd/MM/yyyy' }}
+                    &nbsp; | &nbsp;
+                    <strong>Fin:</strong> {{ solicitud.fechaFin | date:'dd/MM/yyyy' }}
+                  </p>
+                </div>
+
+                <span class="status-chip mt-3" [ngClass]="getSolicitudEstadoClass(solicitud.estado)">
+                  {{ getSolicitudEstadoLabel(solicitud.estado) }}
+                </span>
+              </div>
+
+              @if (puedeCancelarSolicitud(solicitud.estado)) {
+                <div class="request-actions">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    (click)="cancelarSolicitud(solicitud.id)">
+                    Cancelar solicitud
+                  </button>
+                </div>
+              }
+            </div>
+          }
+        }
+      </section>
     </div>
   }
 

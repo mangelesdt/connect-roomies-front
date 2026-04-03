@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 import {
   AlquilerOwnerItem,
   AlquilerResponse,
+  AlquilerUsuarioItem,
   RegistrarAlquilerRequest
 } from '../interfaces/alquiler.interface';
 
@@ -25,11 +26,19 @@ export class AlquilerService {
     return this.http.get<AlquilerOwnerItem[]>(`${this.apiUrl}/api/alquileres/propietario`, { params });
   }
 
+  getSolicitudesUsuario(usuarioId: number): Observable<AlquilerUsuarioItem[]> {
+    return this.http.get<AlquilerUsuarioItem[]>(`${this.apiUrl}/api/alquileres/usuario/${usuarioId}`);
+  }
+
   getTodasSolicitudes(): Observable<AlquilerOwnerItem[]> {
     return this.http.get<AlquilerOwnerItem[]>(`${this.apiUrl}/api/alquileres`);
   }
 
   actualizarEstadoSolicitud(alquilerId: number, estado: string): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/api/alquileres/${alquilerId}/estado`, { estado });
+  }
+
+  cancelarSolicitud(alquilerId: number): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/api/alquileres/${alquilerId}/cancelar`, {});
   }
 }

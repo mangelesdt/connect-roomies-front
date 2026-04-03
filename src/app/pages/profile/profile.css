@@ -30,7 +30,7 @@
 }
 
 .simple-profile-layout {
-  max-width: 700px;
+  max-width: 850px;
   margin: 0 auto;
 }
 
@@ -589,4 +589,70 @@ input {
 .badge-default {
   background: #e2e8f0;
   color: #475569;
+}
+
+.mt-4 {
+  margin-top: 24px;
+}
+
+.request-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 14px;
+  background: #fff;
+}
+
+.request-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.request-main h4 {
+  margin: 0 0 8px;
+}
+
+.request-main p {
+  margin: 0;
+  color: #475569;
+}
+
+.request-actions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.status-chip {
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.badge-pending {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.badge-accepted {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.badge-rejected {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.badge-cancelled {
+  background: #e5e7eb;
+  color: #475569;
+}
+
+.badge-default {
+  background: #e2e8f0;
+  color: #334155;
 }

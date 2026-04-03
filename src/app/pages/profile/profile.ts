@@ -8,7 +8,7 @@ import { ViviendaService } from '../../core/services/vivienda.service';
 import { UserProfile } from '../../core/interfaces/user.interface';
 import { Vivienda } from '../../core/interfaces/vivienda.interface';
 import { AlquilerService } from '../../core/services/alquiler.service';
-import { AlquilerOwnerItem, SolicitudFiltro } from '../../core/interfaces/alquiler.interface';
+import { AlquilerOwnerItem, AlquilerUsuarioItem, SolicitudFiltro } from '../../core/interfaces/alquiler.interface';
 
 @Component({
   selector: 'app-profile',
@@ -44,6 +44,10 @@ export class ProfileComponent implements OnInit {
   solicitudesAdminFiltradas: AlquilerOwnerItem[] = [];
   solicitudesAdminLoading = false;
   solicitudesAdminError = '';
+
+  misSolicitudes: AlquilerUsuarioItem[] = [];
+  misSolicitudesLoading = false;
+  misSolicitudesError = '';
 
   filtroSolicitudes: SolicitudFiltro = 'TODAS';
 
@@ -95,6 +99,7 @@ export class ProfileComponent implements OnInit {
       this.cargarSolicitudesAlquiler();
     } else {
       this.cargarPerfil();
+      this.cargarMisSolicitudes();
     }
   }
 
@@ -269,6 +274,10 @@ export class ProfileComponent implements OnInit {
         return 'badge-accepted';
       case 'RECHAZADO':
         return 'badge-rejected';
+      case 'CANCELADO':
+        return 'badge-cancelled';
+      case 'FINALIZADO':
+        return 'badge-default';
       default:
         return 'badge-default';
     }
@@ -282,6 +291,10 @@ export class ProfileComponent implements OnInit {
         return 'Activa';
       case 'RECHAZADO':
         return 'Rechazada';
+      case 'CANCELADO':
+        return 'Cancelada';
+      case 'FINALIZADO':
+        return 'Finalizada';
       default:
         return estado;
     }
@@ -332,5 +345,41 @@ export class ProfileComponent implements OnInit {
 
   getSolicitudEstadoKey(estado: string): string {
     return `admin.requests.status.${estado}`;
+  }
+
+  cargarMisSolicitudes(): void {
+    if (!this.userId) return;
+
+    this.misSolicitudesLoading = true;
+    this.misSolicitudesError = '';
+
+    this.alquilerService.getSolicitudesUsuario(this.userId).subscribe({
+      next: (data) => {
+        this.misSolicitudes = data ?? [];
+        this.misSolicitudesLoading = false;
+      },
+      error: () => {
+        this.misSolicitudesError = 'No se han podido cargar tus solicitudes';
+        this.misSolicitudesLoading = false;
+      }
+    });
+  }
+
+  cancelarSolicitud(id: number): void {
+    const confirmCancel = confirm('¿Seguro que quieres cancelar esta solicitud?');
+    if (!confirmCancel) return;
+
+    this.alquilerService.cancelarSolicitud(id).subscribe({
+      next: () => {
+        this.cargarMisSolicitudes();
+      },
+      error: () => {
+        this.misSolicitudesError = 'No se pudo cancelar la solicitud';
+      }
+    });
+  }
+
+  puedeCancelarSolicitud(estado: string): boolean {
+    return estado !== 'CANCELADO' && estado !== 'FINALIZADO' && estado !== 'RECHAZADO';
   }
 }
