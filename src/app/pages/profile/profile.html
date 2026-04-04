@@ -353,8 +353,8 @@
             <h3>{{ 'admin.requests.title' | translate }}</h3>
           </div>
 
-          @if (solicitudesAdminError) {
-            <p class="error-message">{{ solicitudesAdminError | translate }}</p>
+          @if (solicitudesError) {
+            <p class="error-message">{{ solicitudesError | translate }}</p>
           }
         </div>
 
@@ -370,19 +370,19 @@
           }
         </div>
 
-        @if (solicitudesAdminLoading) {
+        @if (solicitudesLoading) {
           <div class="requests-empty">
             <div class="requests-empty-icon">!</div>
             <p>{{ 'admin.requests.loading' | translate }}</p>
           </div>
-        } @else if (solicitudesAdminFiltradas.length === 0) {
+        } @else if (solicitudesFiltradas.length === 0) {
           <div class="requests-empty">
             <div class="requests-empty-icon">!</div>
             <p>{{ 'admin.requests.empty' | translate }}</p>
           </div>
         } @else {
           <div class="requests-list">
-            @for (solicitud of solicitudesAdminFiltradas; track trackSolicitud($index, solicitud)) {
+            @for (solicitud of solicitudesFiltradas; track trackSolicitud($index, solicitud)) {
               <article class="request-item">
                 <div class="request-main">
                   <div class="request-top">

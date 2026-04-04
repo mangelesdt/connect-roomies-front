@@ -489,7 +489,9 @@
             "status": {
                 "PENDIENTE": "Pendiente",
                 "ACTIVO": "Activa",
-                "RECHAZADO": "Rechazada"
+                "RECHAZADO": "Rechazada",
+                "CANCELADO": "Cancelada",
+                "FINALIZADO": "Finalizada"
             }
         }
     }

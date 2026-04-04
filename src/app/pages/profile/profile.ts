@@ -40,11 +40,6 @@ export class ProfileComponent implements OnInit {
   solicitudesLoading = false;
   solicitudesError = '';
 
-  solicitudesAdmin: AlquilerOwnerItem[] = [];
-  solicitudesAdminFiltradas: AlquilerOwnerItem[] = [];
-  solicitudesAdminLoading = false;
-  solicitudesAdminError = '';
-
   misSolicitudes: AlquilerUsuarioItem[] = [];
   misSolicitudesLoading = false;
   misSolicitudesError = '';
@@ -327,18 +322,18 @@ export class ProfileComponent implements OnInit {
   }
 
   cargarSolicitudesAdmin(): void {
-    this.solicitudesAdminLoading = true;
-    this.solicitudesAdminError = '';
+    this.solicitudesLoading = true;
+    this.solicitudesError = '';
 
     this.alquilerService.getTodasSolicitudes().subscribe({
       next: (data) => {
-        this.solicitudesAdmin = data ?? [];
+        this.solicitudesAlquiler = data ?? [];
         this.aplicarFiltroSolicitudes();
-        this.solicitudesAdminLoading = false;
+        this.solicitudesLoading = false;
       },
       error: () => {
-        this.solicitudesAdminError = 'No se han podido cargar las solicitudes';
-        this.solicitudesAdminLoading = false;
+        this.solicitudesError = 'No se han podido cargar las solicitudes';
+        this.solicitudesLoading = false;
       }
     });
   }
