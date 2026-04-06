@@ -16,7 +16,7 @@ jobs:
           node-version: "20"
 
       - run: npm ci
-
+      - run: npm install bootstrap
       - name: Build Angular SPA
         run: npx ng run connect-roomies-front:build
 
