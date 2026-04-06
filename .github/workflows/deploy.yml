@@ -17,6 +17,7 @@ jobs:
 
       - run: npm ci
       - run: npm install bootstrap
+      
       - run: npm run build -- --configuration production
 
       - name: Inspect dist
@@ -33,3 +34,5 @@ jobs:
           remote_host: ${{ secrets.VPS_HOST }}
           remote_user: ${{ secrets.VPS_USER }}
           remote_key: ${{ secrets.VPS_SSH_KEY }}
+          rsh: "ssh -o StrictHostKeyChecking=no -p 22"
+          rsync_path: "sudo rsync"
