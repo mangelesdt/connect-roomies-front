@@ -16,6 +16,7 @@ jobs:
           node-version: "20"
 
       - run: npm ci
+      - run: npm install bootstrap
       - run: npm run build -- --configuration production
 
       - name: Inspect dist
