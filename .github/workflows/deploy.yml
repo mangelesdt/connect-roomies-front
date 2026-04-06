@@ -17,7 +17,7 @@ jobs:
 
       - run: npm ci
       - run: npm install bootstrap
-      - run: npm run build -- --configuration production
+      - run: npm run build
 
       - name: Inspect dist
         run: |
