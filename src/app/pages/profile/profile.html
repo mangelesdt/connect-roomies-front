@@ -168,7 +168,7 @@
           @for (vivienda of misViviendas; track vivienda.id) {
             <div class="property-item">
               <img
-                [src]="vivienda.imagenesVivienda?.length ? vivienda.imagenesVivienda[0].urlImg : 'assets/images/house-placeholder.jpg'"
+                [src]="vivienda.imagenesVivienda.length ? vivienda.imagenesVivienda[0].urlImg : 'assets/images/house-placeholder.jpg'"
                 alt="Vivienda"
               />
 
