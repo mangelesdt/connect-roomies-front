@@ -281,15 +281,15 @@ export class ProfileComponent implements OnInit {
   getSolicitudEstadoLabel(estado: string): string {
     switch (estado) {
       case 'PENDIENTE':
-        return 'Pendiente';
+        return ' Pendiente';
       case 'ACTIVO':
-        return 'Activa';
+        return ' Activa';
       case 'RECHAZADO':
-        return 'Rechazada';
+        return ' Rechazada';
       case 'CANCELADO':
-        return 'Cancelada';
+        return ' Cancelada';
       case 'FINALIZADO':
-        return 'Finalizada';
+        return ' Finalizada';
       default:
         return estado;
     }

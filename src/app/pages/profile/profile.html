@@ -209,7 +209,7 @@
                 class="filter-chip"
                 [class.active]="filtroSolicitudes === filtro.key"
                 (click)="seleccionarFiltroSolicitudes(filtro.key)">
-                {{ ('profile.requests.filters.' + filtro.key) | translate }}
+                {{ ('profile.requests.status.' + filtro.key) | translate }}
                 ({{ contarSolicitudes(filtro.key) }})
               </button>
             }
